@@ -1,0 +1,35 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.a777.card_campus.Fragment.BookFragment">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_bookAdd"
+        android:layout_width="60dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/add2"
+        android:layout_margin="@dimen/fab_margin" />
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/GridView_Book"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:numColumns="3">
+
+        </GridView>
+
+    </LinearLayout>
+
+
+</FrameLayout>

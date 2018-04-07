@@ -3,33 +3,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/nav_homepage"
+            android:icon="@drawable/homepage"
+            android:title="主    页" />
+        <item
+            android:id="@+id/nav_DaiDaiDai"
+            android:icon="@drawable/instead2"
             android:title="代代代" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_BaiShiTong"
+            android:icon="@drawable/baishitong"
             android:title="百事通" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_BiaoBaiQiang"
+            android:icon="@drawable/lovewall"
             android:title="表白墙" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:id="@+id/nav_ErShouShu"
+            android:icon="@drawable/ershoushu"
             android:title="二手书" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="其他">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_Setting"
+                android:icon="@drawable/setting"
+                android:title="设置" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_About"
+                android:icon="@drawable/about"
+                android:title="关于" />
         </menu>
     </item>
 

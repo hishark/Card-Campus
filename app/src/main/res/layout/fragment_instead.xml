@@ -1,0 +1,270 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.a777.card_campus.Fragment.InsteadFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!--第一行！-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/CardView_InsteadCourse"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="8dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/instead_course" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:text="代课" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_marginRight="10dp"
+                android:id="@+id/CardView_InsteadFood"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="8dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/instead_food" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:text="代拿外卖" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+        <!--第二行！-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/CardView_InsteadActivity"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="8dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/instead_activity" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:text="代活动" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_marginRight="10dp"
+                android:id="@+id/CardView_InsteadWalk"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="8dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/instead_walk" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:text="代健步走" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+        <!--第三行！-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/CardView_InsteadShop"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="8dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/instead_shop" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:text="代购" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/CardView_InsteadPackage"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="8dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/instead_package" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:text="代拿快递" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

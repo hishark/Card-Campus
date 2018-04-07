@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.a777.card_campus.MainActivity"
+    tools:context="com.example.a777.card_campus.Activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
+
+    <FrameLayout
+        android:id="@+id/Right_Content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

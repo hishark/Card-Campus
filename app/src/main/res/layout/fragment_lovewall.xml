@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.a777.card_campus.Fragment.LovewallFragment">
+
+    <!-- 如果只设置宽高的话会报错噢，要记得设置其他属性 -->
+    <com.moxun.tagcloudlib.view.TagCloudView
+        android:id="@+id/tcv_lovewall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:autoScrollMode="uniform"
+        app:scrollSpeed="0.3"
+        app:darkColor="@color/colorPrimaryDark"
+        app:lightColor="#8e9db6"
+        android:layout_margin="10dp"
+        app:radiusPercent="0.5">
+
+    </com.moxun.tagcloudlib.view.TagCloudView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_bookAdd"
+        android:layout_width="60dp"
+        app:backgroundTint="@color/colorAccent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/lovewalladd"
+        android:layout_margin="@dimen/fab_margin" />
+
+</FrameLayout>
