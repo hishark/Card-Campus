@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+        //隐藏标题栏
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
@@ -96,9 +96,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     /**
-     * 检测当的网络状态
+     * 检测当前网络状态
      * @param context Context
      * @return true 表示网络可用
      */

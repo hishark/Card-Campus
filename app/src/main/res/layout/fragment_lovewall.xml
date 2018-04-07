@@ -15,12 +15,12 @@
         app:darkColor="@color/colorPrimaryDark"
         app:lightColor="#8e9db6"
         android:layout_margin="10dp"
-        app:radiusPercent="0.5">
+        app:radiusPercent="0.8">
 
     </com.moxun.tagcloudlib.view.TagCloudView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_bookAdd"
+        android:id="@+id/fab_loveAdd"
         android:layout_width="60dp"
         app:backgroundTint="@color/colorAccent"
         android:layout_height="60dp"

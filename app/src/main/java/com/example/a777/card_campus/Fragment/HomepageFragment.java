@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
 import com.jude.rollviewpager.RollPagerView;
@@ -64,7 +63,8 @@ public class HomepageFragment extends Fragment {
 
         //轮播图片源
         private int[] res={
-                R.drawable.rvp_1,R.drawable.rvp_2,R.drawable.rvp_3
+                R.drawable.rpv_4
+
         };
 
         @Override

@@ -3,6 +3,7 @@ package com.example.a777.card_campus.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,18 @@ public class LovewallFragment extends Fragment {
         lovewallAdapter = new LovewallAdapter(getContext(),loveTitle);
         tagCloudView.setAdapter(lovewallAdapter);
 
+        /**
+         * 悬浮球的点击事件，点一下加一条表白记录，先做了一个假的
+         */
+        FloatingActionButton fab = (FloatingActionButton)view.findViewById(R.id.fab_loveAdd);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loveTitle.add("我来表个白就走");
+                lovewallAdapter.notifyDataSetChanged();
+            }
+        });
+
         return view;
     }
 
@@ -51,8 +64,8 @@ public class LovewallFragment extends Fragment {
         loveTitle.add("捷豹捷豹跑得快");
         loveTitle.add("肖小月是猪");
         loveTitle.add("郑见见智障");
-        loveTitle.add("N433一寝室我都喜欢啊快嫁给我");
         loveTitle.add("嘻嘻嘻嘻");
+        loveTitle.add("小洁嫁我");
         loveTitle.add("啊啊啊啊啊啊啊啊啊");
         loveTitle.add("表白一个");
         loveTitle.add("哼唧");

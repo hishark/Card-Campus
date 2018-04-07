@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -127,8 +128,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_homepage){
             replaceFragment(homepageFragment);
         } else if (id == R.id.nav_DaiDaiDai) {
+            //getWindow().setTitle("代代代");
             replaceFragment(insteadFragment);
-            getWindow().setTitle("代代代");
+
         } else if (id == R.id.nav_BaiShiTong) {
             replaceFragment(everythingFragment);
         } else if (id == R.id.nav_BiaoBaiQiang) {
@@ -165,4 +167,16 @@ public class MainActivity extends AppCompatActivity
         replaceFragment(homepageFragment);
     }
 
+
+    /**
+     * Android按返回键退出程序但不销毁
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(false);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
