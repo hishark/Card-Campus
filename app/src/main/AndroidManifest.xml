@@ -23,8 +23,6 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
 
-
-
         </activity>
         <activity
             android:name=".activity.LoginActivity"
@@ -36,6 +34,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.DaikeActivity"></activity>
+        <activity android:name=".activity.DaifoodActivity"></activity>
+        <activity android:name=".activity.DaiactivityActivity"></activity>
+        <activity android:name=".activity.DaiwalkActivity"></activity>
+        <activity android:name=".activity.DaibuyActivity"></activity>
+        <activity android:name=".activity.DaideliverActivity"></activity>
     </application>
 
 </manifest>

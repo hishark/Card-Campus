@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -143,9 +144,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String resp = response.body().string();
-                    Document parse = Jsoup.parse(resp);
+                public void onResponse(Call call, final Response response) throws IOException {
+                    final String resp = response.body().string();
+                    final Document parse = Jsoup.parse(resp);
                     //如果返回密码错误则停止获得参数并需要重新输入学号密码
 
                     Element content = parse.getElementById("__VIEWSTATE");
@@ -156,6 +157,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     String userName = et_userName.getText().toString();
                     String passWord = et_passWord.getText().toString();
+
                     //登录教务在线的所有参数post
                     FormBody formBody = new FormBody.Builder()
                             .add("__EVENTTARGET", "")
@@ -226,6 +228,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                         }
+
                     });
                 }
             });

@@ -10,7 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.a777.card_campus.R;
+import com.example.a777.card_campus.activity.DaiactivityActivity;
+import com.example.a777.card_campus.activity.DaibuyActivity;
+import com.example.a777.card_campus.activity.DaideliverActivity;
+import com.example.a777.card_campus.activity.DaifoodActivity;
 import com.example.a777.card_campus.activity.DaikeActivity;
+import com.example.a777.card_campus.activity.DaiwalkActivity;
 
 public class InsteadFragment extends Fragment {
 
@@ -46,6 +51,8 @@ public class InsteadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"hello！拿个外卖呗！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), DaifoodActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -59,6 +66,8 @@ public class InsteadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"hello！活动我帮你去！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), DaiactivityActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -72,6 +81,8 @@ public class InsteadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"hello！不想健步走对吧！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),DaiwalkActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,6 +96,8 @@ public class InsteadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"hello！代购不！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),DaibuyActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -97,6 +110,8 @@ public class InsteadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"hello！快递又来了哦！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), DaideliverActivity.class);
+                startActivity(intent);
             }
         });
 
