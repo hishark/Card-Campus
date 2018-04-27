@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.a777.card_campus.Fragment.LovewallFragment">
+    tools:context="com.example.a777.card_campus.fragment.LovewallFragment">
 
     <!-- 如果只设置宽高的话会报错噢，要记得设置其他属性 -->
     <com.moxun.tagcloudlib.view.TagCloudView

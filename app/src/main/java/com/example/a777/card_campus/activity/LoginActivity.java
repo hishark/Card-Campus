@@ -1,4 +1,4 @@
-package com.example.a777.card_campus.Activity;
+package com.example.a777.card_campus.activity;
 
 import android.content.Context;
 import android.content.Intent;

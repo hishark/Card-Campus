@@ -1,7 +1,5 @@
-package com.example.a777.card_campus.Fragment;
+package com.example.a777.card_campus.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,9 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.Toast;
 
-import com.example.a777.card_campus.Adapter.BookAdapter;
+import com.example.a777.card_campus.adapter.BookAdapter;
 import com.example.a777.card_campus.R;
 
 import java.util.ArrayList;

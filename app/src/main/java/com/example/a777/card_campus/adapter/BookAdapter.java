@@ -1,4 +1,4 @@
-package com.example.a777.card_campus.Adapter;
+package com.example.a777.card_campus.adapter;
 
 import android.content.Context;
 import android.view.Gravity;

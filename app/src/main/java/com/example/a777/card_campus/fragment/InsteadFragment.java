@@ -1,5 +1,6 @@
-package com.example.a777.card_campus.Fragment;
+package com.example.a777.card_campus.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.a777.card_campus.R;
+import com.example.a777.card_campus.activity.DaikeActivity;
 
 public class InsteadFragment extends Fragment {
 
@@ -29,6 +31,8 @@ public class InsteadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"hello！代课吗！",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), DaikeActivity.class);
+                startActivity(intent);
             }
         });
 

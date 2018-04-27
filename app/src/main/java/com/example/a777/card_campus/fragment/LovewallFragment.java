@@ -1,7 +1,5 @@
-package com.example.a777.card_campus.Fragment;
+package com.example.a777.card_campus.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.a777.card_campus.Adapter.LovewallAdapter;
+import com.example.a777.card_campus.adapter.LovewallAdapter;
 import com.example.a777.card_campus.R;
 import com.moxun.tagcloudlib.view.TagCloudView;
-import com.moxun.tagcloudlib.view.TagsAdapter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class LovewallFragment extends Fragment {
