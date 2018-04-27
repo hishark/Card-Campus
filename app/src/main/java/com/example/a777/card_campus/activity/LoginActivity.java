@@ -18,6 +18,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.List;
 
 
 import okhttp3.*;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.constant.Constant;
+import com.example.a777.card_campus.util.EducationalSysLoginParse;
 
 public class LoginActivity extends AppCompatActivity {
     private String loginUrl = "http://jwc.jxnu.edu.cn/Default_Login.aspx?preurl=";//教务在线登录url
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     private static String __VIEWSTATE;//教务在线html动态post参数之一
     private static String __EVENTVALIDATION;;//教务在线html动态post参数之一
+    private static String Student_Name;
     private OkHttpClient.Builder builder;// OkHttpClient内部类Builder对象
     private OkHttpClient okHttpClient;// OkHttpClient对象
     private Request request;
@@ -44,7 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Constant.LOGIN_SUCCESS:
+                    //登录成功就跳转到MainActivity并且把当前用户的姓名传递过去显示在侧滑栏顶部
                     Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                    intent.putExtra("student_name",msg.obj.toString());
                     startActivity(intent);
                     finish();
                     break;
@@ -69,6 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"您的密码不正确",Toast.LENGTH_SHORT).show();
                     break;
             }
+
+
+
         }
     };
 
@@ -139,10 +147,13 @@ public class LoginActivity extends AppCompatActivity {
                     String resp = response.body().string();
                     Document parse = Jsoup.parse(resp);
                     //如果返回密码错误则停止获得参数并需要重新输入学号密码
+
                     Element content = parse.getElementById("__VIEWSTATE");
                     __VIEWSTATE = content.attr("value");
                     Element content2 = parse.getElementById("__EVENTVALIDATION");
                     __EVENTVALIDATION = content2.attr("value");
+
+
                     String userName = et_userName.getText().toString();
                     String passWord = et_passWord.getText().toString();
                     //登录教务在线的所有参数post
@@ -173,6 +184,14 @@ public class LoginActivity extends AppCompatActivity {
                             Document parse = Jsoup.parse(resp);
                             Elements getIsPwd = parse.select("script");
 
+                            /**
+                             * 获取当前登录用户的真实姓名
+                             */
+                            EducationalSysLoginParse myParse = new EducationalSysLoginParse(resp);
+                            final List endList = myParse.getEndList();
+                            Student_Name = endList.get(0).toString();
+                            Log.d("姓名",Student_Name);
+
                             String s = getIsPwd.html();
                             Log.e("LoginActivity", getIsPwd.html());
                             Message msg = mHandler.obtainMessage();
@@ -200,6 +219,8 @@ public class LoginActivity extends AppCompatActivity {
                                 return;
                             } else {
                                 msg.what = Constant.LOGIN_SUCCESS;//传递msg  成功
+                                //成功的话就把用户姓名传过去
+                                msg.obj = Student_Name;
                                 mHandler.sendMessage(msg);
                                 return;
 
