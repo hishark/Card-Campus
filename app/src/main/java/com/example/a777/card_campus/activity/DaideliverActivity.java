@@ -34,6 +34,7 @@ public class DaideliverActivity extends AppCompatActivity {
 
     //模拟器用10.0.2.2，真机用无线局域网适配器ip——192.168.137.1
     private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaideliverList";
+    //private static String URL="http://192.168.137.91:8080/Card-Campus-Server/getDaideliverList";
     private List<HashMap<String, Object>> daideliverResult;
     //Handler用来从子线程往主线程传输数据
     private Handler handler = new Handler() {
@@ -58,7 +59,7 @@ public class DaideliverActivity extends AppCompatActivity {
         /**
          * 从服务器取得代课数据
          */
-        getDaikeList();
+        getDaideliverList();
 
     }
 
@@ -69,7 +70,7 @@ public class DaideliverActivity extends AppCompatActivity {
         lv_daidelivers = (ListView)this.findViewById(R.id.lv_daidelivers);
     }
 
-    private void getDaikeList() {
+    private void getDaideliverList() {
         //实例化OkHttpClient
         OkHttpClient client = new OkHttpClient();
         //创建表单请求体

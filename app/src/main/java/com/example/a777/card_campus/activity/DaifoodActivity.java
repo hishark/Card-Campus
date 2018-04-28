@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.adapter.DaifoodAdapter;
-import com.example.a777.card_campus.adapter.DaikeAdapter;
 import com.example.a777.card_campus.bean.User;
 import com.google.gson.Gson;
 
@@ -35,6 +34,7 @@ public class DaifoodActivity extends AppCompatActivity {
 
     //模拟器用10.0.2.2，真机用无线局域网适配器ip——192.168.137.1
     private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaifoodList";
+    //private static String URL="http://192.168.137.91:8080/Card-Campus-Server/getDaifoodList";
     private List<HashMap<String, Object>> daifoodResult;
     //Handler用来从子线程往主线程传输数据
     private Handler handler = new Handler() {

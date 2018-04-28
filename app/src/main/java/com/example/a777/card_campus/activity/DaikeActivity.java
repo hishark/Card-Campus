@@ -1,10 +1,15 @@
 package com.example.a777.card_campus.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.a777.card_campus.R;
@@ -36,6 +41,7 @@ public class DaikeActivity extends AppCompatActivity {
 
     //模拟器用10.0.2.2，真机用无线局域网适配器ip——192.168.137.1
     private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaikeList";
+    //private static String URL="http://192.168.137.91:8080/Card-Campus-Server/getDaikeList";
     private List<HashMap<String, Object>> daikeResult;
     //Handler用来从子线程往主线程传输数据
     private Handler handler = new Handler() {
@@ -44,18 +50,45 @@ public class DaikeActivity extends AppCompatActivity {
 
             //控件初始化
             initView();
-
             //适配器一定要写在这里，不然会出现空指针问题
             DaikeAdapter daikeadapter = new DaikeAdapter(getApplicationContext(),daikeResult);
             lv_daikes.setAdapter(daikeadapter);
 
+            lv_daikes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(DaikeActivity.this,DaikeDetailActivity.class);
+                    intent.putExtra("daike", daikeResult.get(i));
+                    startActivity(intent);
+                }
+            });
             super.handleMessage(msg);
         }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_daike);
+        getSupportActionBar().hide();
+
+        Button daike_back=(Button)this.findViewById(R.id.daike_back);
+        daike_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        FloatingActionButton sendDaikePost = (FloatingActionButton)this.findViewById(R.id.daike_send);
+        sendDaikePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DaikeActivity.this,SendDaikepostActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         /**
          * 从服务器取得代课数据
@@ -70,7 +103,8 @@ public class DaikeActivity extends AppCompatActivity {
     private void initView() {
         lv_daikes = (ListView)this.findViewById(R.id.lv_daikes);
     }
-
+    List<HashMap<String, Object>> daikes=null;
+    HashMap<String, Object> daike=null;
     private void getDaikeList() {
         //实例化OkHttpClient
         OkHttpClient client = new OkHttpClient();
@@ -105,8 +139,8 @@ public class DaikeActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 if(response.isSuccessful()){
 
-                    List<HashMap<String, Object>> daikes=null;
-                    HashMap<String, Object> daike=null;
+                    /*List<HashMap<String, Object>> daikes=null;
+                    HashMap<String, Object> daike=null;*/
 
                     //从服务器取到Json键值对{“key”:“value”}
                     String temp = response.body().string();
@@ -121,7 +155,7 @@ public class DaikeActivity extends AppCompatActivity {
                             daike.put("dpost_id", jsonObject.get("dpost_id"));
                             daike.put("dpost_content",jsonObject.get("dpost_content"));
                             daike.put("dpost_title", jsonObject.get("dpost_title"));
-                            daike.put("dpost_time", jsonObject.get("dpost_time"));
+                            //daike.put("dpost_time", jsonObject.get("dpost_time"));
                             daike.put("dpost_type", jsonObject.get("dpost_type"));
                             daike.put("is_solved", jsonObject.get("is_solved"));
 

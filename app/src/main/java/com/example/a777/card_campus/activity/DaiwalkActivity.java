@@ -33,6 +33,7 @@ public class DaiwalkActivity extends AppCompatActivity {
 
     //模拟器用10.0.2.2，真机用无线局域网适配器ip——192.168.137.1
     private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaiwalkList";
+    //private static String URL="http://192.168.137.91:8080/Card-Campus-Server/getDaiwalkList";
     private List<HashMap<String, Object>> daiwalkResult;
     //Handler用来从子线程往主线程传输数据
     private Handler handler = new Handler() {

@@ -22,23 +22,23 @@
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DaikeActivity"></activity>
-        <activity android:name=".activity.DaifoodActivity"></activity>
-        <activity android:name=".activity.DaiactivityActivity"></activity>
-        <activity android:name=".activity.DaiwalkActivity"></activity>
-        <activity android:name=".activity.DaibuyActivity"></activity>
-        <activity android:name=".activity.DaideliverActivity"></activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_main" />
+        <activity android:name=".activity.DaikeActivity" />
+        <activity android:name=".activity.DaifoodActivity" />
+        <activity android:name=".activity.DaiactivityActivity" />
+        <activity android:name=".activity.DaiwalkActivity" />
+        <activity android:name=".activity.DaibuyActivity" />
+        <activity android:name=".activity.DaideliverActivity" />
+        <activity android:name=".activity.DaikeDetailActivity" />
+        <activity android:name=".activity.SendDaikepostActivity"></activity>
     </application>
 
 </manifest>

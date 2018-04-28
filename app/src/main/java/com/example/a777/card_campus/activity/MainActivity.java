@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity
         /**
          * 将侧滑栏中的HeaderView的名字设置成当前登录用户的真实姓名
          */
-        View headerView = navigationView.getHeaderView(0);
+        /*View headerView = navigationView.getHeaderView(0);
         //获取从LoginActivity传来的姓名
         String userName = getIntent().getExtras().getString("student_name");
         TextView tv_username = (TextView)headerView.findViewById(R.id.nav_header_userName);
-        tv_username.setText(userName);
+        tv_username.setText(userName);*/
 
     }
 
