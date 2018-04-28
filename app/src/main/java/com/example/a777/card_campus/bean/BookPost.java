@@ -11,8 +11,15 @@ public class BookPost {
     int book_id;
     String book_img;
     String book_describe;
+    String book_title;
     Timestamp book_time;
 
+    public String getBook_title() {
+        return book_title;
+    }
+    public void setBook_title(String book_title) {
+        this.book_title = book_title;
+    }
 
     public User getUser() {
 
