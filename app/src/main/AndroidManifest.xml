@@ -38,7 +38,9 @@
         <activity android:name=".activity.DaibuyActivity" />
         <activity android:name=".activity.DaideliverActivity" />
         <activity android:name=".activity.DaikeDetailActivity" />
-        <activity android:name=".activity.SendDaikepostActivity"></activity>
+        <activity android:name=".activity.SendDaikepostActivity" />
+        <activity android:name=".activity.AddQuestionPostActivity" />
+        <activity android:name=".activity.QuestionPostDetailActivity"></activity>
     </application>
 
 </manifest>

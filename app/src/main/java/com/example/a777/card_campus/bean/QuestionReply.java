@@ -1,12 +1,13 @@
 package com.example.a777.card_campus.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by 777 on 2018/4/27.
  */
 
-public class QuestionReply {
+public class QuestionReply implements Serializable {
     int breply_id;
     QuestionPost questionPost;
     User user;

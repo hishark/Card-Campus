@@ -12,10 +12,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.adapter.DaikeAdapter;
 import com.example.a777.card_campus.bean.User;
-import com.example.a777.card_campus.util.DialogUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -23,7 +23,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,6 +38,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
 
 public class DaikeActivity extends AppCompatActivity {
 
@@ -47,12 +53,15 @@ public class DaikeActivity extends AppCompatActivity {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             daikeResult = (List)msg.obj;
-
             //控件初始化
             initView();
             //适配器一定要写在这里，不然会出现空指针问题
             DaikeAdapter daikeadapter = new DaikeAdapter(getApplicationContext(),daikeResult);
             lv_daikes.setAdapter(daikeadapter);
+
+            /*User user = (User)daikeResult.get(0).get("user");
+            String username = user.getUser_nickname();
+            Log.d("username",username);*/
 
             lv_daikes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -62,6 +71,7 @@ public class DaikeActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
             super.handleMessage(msg);
         }
     };
@@ -155,7 +165,6 @@ public class DaikeActivity extends AppCompatActivity {
                             daike.put("dpost_id", jsonObject.get("dpost_id"));
                             daike.put("dpost_content",jsonObject.get("dpost_content"));
                             daike.put("dpost_title", jsonObject.get("dpost_title"));
-                            //daike.put("dpost_time", jsonObject.get("dpost_time"));
                             daike.put("dpost_type", jsonObject.get("dpost_type"));
                             daike.put("is_solved", jsonObject.get("is_solved"));
 
@@ -166,8 +175,25 @@ public class DaikeActivity extends AppCompatActivity {
                             String userresult = jsonObject.get("user").toString();
                             Gson gson = new Gson();
                             User user = gson.fromJson(userresult, User.class);
-
                             daike.put("user",user);
+
+                            //timeresult是从数据库插到的dpost_time字段，类型为timestamp
+                            //从数据库读出来长这个样子：存到timeresult里面
+                            //{"date":21,"day":6,"hours":23,"minutes":18,"month":3,"nanos":0,"seconds":0,"time":1524323880000,"timezoneOffset":-480,"year":118}
+                            String timeresult = jsonObject.get("dpost_time").toString();
+
+                            //利用fastJson——JSON取出timeresult里面的time字段，也就是13位的时间戳
+                            long time = JSON.parseObject(timeresult).getLong("time");
+                            Timestamp trueTime = new Timestamp(time);
+
+                            //把时间put进daike
+                            daike.put("dpost_time",trueTime);
+
+                            //将13位时间戳转换为年月日时分秒！
+                            /*Long time1 = 1524323880000L;
+                            SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            Date date= new Date(time1);
+                            String d = format.format(date);*/
 
                             daikes.add(daike);
                         }

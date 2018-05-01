@@ -1,10 +1,12 @@
 package com.example.a777.card_campus.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by 777 on 2018/4/27.
  */
 
-public class User {
+public class User implements Serializable {
     String user_sno;
     String user_nickname;
     String user_avatar;

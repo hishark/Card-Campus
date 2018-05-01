@@ -12,73 +12,75 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            app:cardBackgroundColor="@color/white"
-            app:contentPadding="8dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            android:layout_height="60dp"
+            >
 
             <LinearLayout
+                android:background="#607D8B"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="你已经问过"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_questionNumber"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="3"
+
+                    />
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="个问题啦，点击查看"
+                    android:layout_marginRight="20dp"
+                    />
 
                 <ImageView
-                    android:id="@+id/item_iv"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="6dp"
-                    android:background="@drawable/avatar1"
-                    android:scaleType="centerCrop"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/item_title_tv"
-                        android:layout_width="wrap_content"
-                        android:textColor="#383838"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:text="百事通Test"/>
-
-                    <TextView
-                        android:id="@+id/item_content_tv"
-                        android:textColor="#545454"
-                        android:textSize="16sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"/>
-                </LinearLayout>
-
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/view3"/>
             </LinearLayout>
+
         </android.support.v7.widget.CardView>
 
 
-        <android.support.v7.widget.CardView
+
+        <ListView
+            android:id="@+id/lv_question"
+            android:divider="@null"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:cardElevation="8dp">
+            android:layout_height="match_parent">
 
 
-        </android.support.v7.widget.CardView>
+        </ListView>
+
+
+
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_questionpost_add"
+        android:layout_width="60dp"
+        app:backgroundTint="@color/colorAccent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center"
+        android:src="@drawable/post1"
+        android:layout_margin="@dimen/fab_margin" />
 
 </FrameLayout>

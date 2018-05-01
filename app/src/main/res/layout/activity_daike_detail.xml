@@ -16,8 +16,8 @@
                 app:contentInsetStart="0dp">
                 <Button
                     android:id="@+id/daikedetail_back"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/back"/>
             </android.support.v7.widget.Toolbar>
@@ -47,6 +47,7 @@
                         android:id="@+id/dkdetail_avatar"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
                         android:src="@drawable/avatar1"/>
 
                     <TextView
@@ -72,8 +73,8 @@
                     android:layout_marginBottom="15dp">
                     <TextView
                         android:id="@+id/daikedetail_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:padding="10dp"/>
                     <TextView
                         android:id="@+id/daikedetail_content"
@@ -87,7 +88,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center">
                     <Button
                         android:id="@+id/dkdetail_qq"

@@ -1,12 +1,13 @@
 package com.example.a777.card_campus.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by 777 on 2018/4/27.
  */
 
-public class LovePost {
+public class LovePost implements Serializable {
     int love_id;
     String love_username;
     int is_anonymous;

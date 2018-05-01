@@ -68,6 +68,7 @@ public class LovewallFragment extends Fragment {
         loveTitle.add("好玩好玩");
         loveTitle.add("今天食堂看到一个小哥");
         loveTitle.add("穿白裙子的小姐姐我喜欢你");
+        loveTitle.add("胡纯你好我是你滴爱人，love you=3=");
     }
 
 }

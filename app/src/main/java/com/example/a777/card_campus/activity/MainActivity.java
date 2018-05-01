@@ -142,8 +142,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_DaiDaiDai) {
             //getWindow().setTitle("代代代");
             replaceFragment(insteadFragment);
-
         } else if (id == R.id.nav_BaiShiTong) {
+            everythingFragment = new EverythingFragment();
             replaceFragment(everythingFragment);
         } else if (id == R.id.nav_BiaoBaiQiang) {
             replaceFragment(lovewallFragment);
