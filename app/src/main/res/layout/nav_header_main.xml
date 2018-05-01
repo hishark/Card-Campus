@@ -13,9 +13,10 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_header_avatar"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/avatar1"/>
+        android:src="@drawable/useravatar"/>
 
     <!--<ImageView
         android:id="@+id/imageView"

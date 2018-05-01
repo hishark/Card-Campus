@@ -11,4 +11,7 @@ public class Constant {
     public static final int LOGIN_FAILURE_SNO_NULL = 4;//学号为空，登录失败
     public static final int LOGIN_FAILURE_PASSWORD_NULL = 5;//密码为空，登录失败
     public static final int LOGIN_FAILURE_NETWORK_ERROR = 6;//网络连接错误，登录失败
+
+    public static final int ADD_NEW_USER = 7;//用户不存在，往数据库插入当前用户
+    public static final int EXIST_USER = 8;//用户存在
 }

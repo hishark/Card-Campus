@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.fragment.BookFragment;
 import com.example.a777.card_campus.fragment.EverythingFragment;
 import com.example.a777.card_campus.fragment.HomepageFragment;
@@ -26,6 +27,8 @@ import com.example.a777.card_campus.fragment.LovewallFragment;
 import com.example.a777.card_campus.R;
 
 import org.w3c.dom.Text;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -79,11 +82,14 @@ public class MainActivity extends AppCompatActivity
         /**
          * 将侧滑栏中的HeaderView的名字设置成当前登录用户的真实姓名
          */
-        /*View headerView = navigationView.getHeaderView(0);
+        View headerView = navigationView.getHeaderView(0);
         //获取从LoginActivity传来的姓名
         String userName = getIntent().getExtras().getString("student_name");
+        String avatar = getIntent().getExtras().getString("student_avatar");
         TextView tv_username = (TextView)headerView.findViewById(R.id.nav_header_userName);
-        tv_username.setText(userName);*/
+        CircleImageView ci_avatar = (CircleImageView)headerView.findViewById(R.id.nav_header_avatar);
+        tv_username.setText(userName);
+        Glide.with(getApplicationContext()).load(avatar).into(ci_avatar);
 
     }
 
