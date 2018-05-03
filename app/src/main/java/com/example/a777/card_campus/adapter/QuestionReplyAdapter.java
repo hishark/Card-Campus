@@ -61,7 +61,12 @@ public class QuestionReplyAdapter extends BaseAdapter {
         Glide.with(context).load(user.getUser_avatar()).into(avatar);
         tv_username.setText(username);
         tv_replycontent.setText(replyList.get(i).get("breply_content").toString());
-        tv_replytime.setText(replyList.get(i).get("breply_time").toString());
+
+        String timestamp = replyList.get(i).get("breply_time").toString();
+        String post_time = timestamp.substring(0,timestamp.length()-2);
+
+
+        tv_replytime.setText(post_time);
 
         return ll;
     }

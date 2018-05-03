@@ -44,8 +44,8 @@ import com.google.gson.Gson;
 
 public class LoginActivity extends AppCompatActivity {
     private String loginUrl = "http://jwc.jxnu.edu.cn/Default_Login.aspx?preurl=";//教务在线登录url
-    private String searchUserUrl = "http://10.0.2.2:8080/Card-Campus-Server/getUserBySno";
-    private String insertUserUrl = "http://10.0.2.2:8080/Card-Campus-Server/insertNewUser";
+    private String searchUserUrl = "http://47.106.148.107:8080/Card-Campus-Server/getUserBySno";
+    private String insertUserUrl = "http://47.106.148.107:8080/Card-Campus-Server/insertNewUser";
 
     private EditText et_userName,et_passWord;
     private Button login;

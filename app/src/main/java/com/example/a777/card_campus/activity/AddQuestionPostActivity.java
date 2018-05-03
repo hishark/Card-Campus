@@ -15,5 +15,6 @@ public class AddQuestionPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question_post);
 
+        User user = CurrentUserUtil.getCurrentUser();
     }
 }

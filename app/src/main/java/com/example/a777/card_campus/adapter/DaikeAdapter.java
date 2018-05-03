@@ -1,6 +1,7 @@
 package com.example.a777.card_campus.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -51,6 +52,9 @@ public class DaikeAdapter extends BaseAdapter {
         CircleImageView avatar = (CircleImageView)ll.findViewById(R.id.daike_avatar);
         TextView tv_username = (TextView)ll.findViewById(R.id.daike_username);
         TextView tv_daike_content = (TextView)ll.findViewById(R.id.daike_title);
+
+        tv_username.setTextColor(Color.parseColor("#757575"));
+        tv_daike_content.setTextColor(Color.parseColor("#757575"));
 
         User user = (User)list.get(i).get("user");
         String username = user.getUser_nickname();

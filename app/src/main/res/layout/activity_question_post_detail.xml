@@ -86,25 +86,6 @@
                     android:padding="10dp"/>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:gravity="center">
-                <Button
-                    android:id="@+id/questionpostdetail_qq"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/qq"/>
-                <Button
-                    android:id="@+id/questionpostdetail_tel"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_toRightOf="@+id/questionpostdetail_qq"
-                    android:background="@drawable/phone"/>
-
-            </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

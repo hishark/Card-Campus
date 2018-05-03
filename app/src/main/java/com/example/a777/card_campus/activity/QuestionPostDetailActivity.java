@@ -22,7 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class QuestionPostDetailActivity extends AppCompatActivity {
     TextView questionpostdetail_username,questionpostdetail_time,questionpostdetail_title,questionpostdetail_content;
-    Button questionpostdetal_qq,questionpostdetal_tel;
+
     CircleImageView user_avatar;
     ListView lv_reply;
     @Override
@@ -85,8 +85,7 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
         questionpostdetail_title=(TextView)this.findViewById(R.id.questionpost_title);
         questionpostdetail_content=(TextView)this.findViewById(R.id.questionpostdetail_content);
 
-        questionpostdetal_qq=(Button)this.findViewById(R.id.questionpostdetail_qq);
-        questionpostdetal_tel=(Button)this.findViewById(R.id.questionpostdetail_tel);
+
 
         lv_reply = (ListView)this.findViewById(R.id.lv_questionpost_reply);
 

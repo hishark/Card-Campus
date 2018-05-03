@@ -49,9 +49,10 @@ public class EverythingFragment extends Fragment {
     //定义成员变量
     private View view;
     private ListView lv_question;
-    private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getQuestionPostList";
+    //买了个服务器 ip为47.106.148.107
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionPostList";
     private List<HashMap<String, Object>> QuestionPostResult;
-    private static String reply_URL="http://10.0.2.2:8080/Card-Campus-Server/getQuestionPostReplyNum";
+    private static String reply_URL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionPostReplyNum";
     private List<HashMap<String, Object>> QuestionReplyResult;
     private List<List<HashMap<String, Object>>> QuestionReplyResults;
     private int QuestionReplyNum[];

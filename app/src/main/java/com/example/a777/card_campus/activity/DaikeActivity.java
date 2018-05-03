@@ -46,7 +46,8 @@ public class DaikeActivity extends AppCompatActivity {
     ListView lv_daikes;
 
     //模拟器用10.0.2.2，真机用无线局域网适配器ip——192.168.137.1
-    private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaikeList";
+    //买了个服务器 ip为47.106.148.107
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/getDaikeList";
     //private static String URL="http://192.168.137.91:8080/Card-Campus-Server/getDaikeList";
     private List<HashMap<String, Object>> daikeResult;
     //Handler用来从子线程往主线程传输数据

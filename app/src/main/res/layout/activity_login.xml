@@ -55,6 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="学号"
+                        android:text="201526702054"
                         android:inputType="text"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -66,6 +67,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:text="106626"
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

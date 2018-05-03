@@ -1,6 +1,7 @@
 package com.example.a777.card_campus.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -72,20 +73,22 @@ public class QuestionPostAdapter extends BaseAdapter {
 
         TextView tv_questionReplyNum = (TextView)ll.findViewById(R.id.questionpost_replyNum);
         tv_questionReplyNum.setText(ReplyNum[i+1]+"");
+        tv_questionReplyNum.setTextColor(Color.parseColor("#757575"));
 
         User user = (User)list.get(i).get("user");
         String username = user.getUser_nickname();
 
         TextView tv_username = (TextView)ll.findViewById(R.id.questionpost_username);
         tv_username.setText(username);
+        tv_username.setTextColor(Color.parseColor("#757575"));
 
         TextView tv_questionpost_title = (TextView)ll.findViewById(R.id.questionpost_title);
         String question_post_title = list.get(i).get("bpost_title").toString();
         tv_questionpost_title.setText(question_post_title);
+        tv_questionpost_title.setTextColor(Color.parseColor("#757575"));
 
         CircleImageView avatar = (CircleImageView)ll.findViewById(R.id.questionpost_avatar);
         Glide.with(context).load(user.getUser_avatar()).into(avatar);
-
 
         return ll;
     }
