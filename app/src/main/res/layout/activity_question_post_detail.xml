@@ -90,18 +90,25 @@
     </android.support.v7.widget.CardView>
 
 
-    <ListView
-        android:divider="@null"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_reply"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lv_questionpost_reply">
+        android:layout_height="match_parent">
 
-    </ListView>
+        <ListView
+            android:divider="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lv_questionpost_reply">
+
+        </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_questionpost_add"
+        android:id="@+id/fab_addReply"
         android:layout_width="60dp"
         app:backgroundTint="@color/colorAccent"
         android:layout_height="60dp"

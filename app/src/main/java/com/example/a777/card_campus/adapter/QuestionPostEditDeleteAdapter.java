@@ -2,12 +2,11 @@ package com.example.a777.card_campus.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,38 +14,23 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
-import com.example.a777.card_campus.bean.QuestionPost;
 import com.example.a777.card_campus.bean.User;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by 777 on 2018/4/28.
  */
 
-public class QuestionPostAdapter extends BaseAdapter {
+public class QuestionPostEditDeleteAdapter extends BaseAdapter {
     Context context;
     List<HashMap<String, Object>> list;
     int ReplyNum[];
 
-    public QuestionPostAdapter(Context applicationContext, List<HashMap<String, Object>> questionPostResult, int[] questionReplyNum) {
+    public QuestionPostEditDeleteAdapter(Context applicationContext, List<HashMap<String, Object>> questionPostResult, int[] questionReplyNum) {
         this.context = applicationContext;
         this.list = questionPostResult;
         this.ReplyNum = questionReplyNum;
@@ -71,12 +55,22 @@ public class QuestionPostAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
-        final LinearLayout ll=(LinearLayout)View.inflate(context, R.layout.questionpost_item, null);
+        final LinearLayout ll=(LinearLayout)View.inflate(context, R.layout.questionposteditdelete_item, null);
+
+        Button edit = (Button)ll.findViewById(R.id.questionpost_edit);
+        //Button delete = (Button)ll.findViewById(R.id.questionpost_delete);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemEditListener.onEditClick(i);
+            }
+        });
+
 
 
         TextView tv_questionReplyNum = (TextView)ll.findViewById(R.id.questionpost_replyNum);
-        //tv_questionReplyNum.setText(ReplyNum[i+1]+"");
-        tv_questionReplyNum.setText(ReplyNum[list.size()-i]+"");
+        tv_questionReplyNum.setText(ReplyNum[i+1]+"");
         tv_questionReplyNum.setTextColor(Color.parseColor("#757575"));
 
         User user = (User)list.get(i).get("user");
@@ -97,6 +91,31 @@ public class QuestionPostAdapter extends BaseAdapter {
         return ll;
     }
 
+    /**
+     * 删除按钮的监听接口
+     */
+    public interface onItemDeleteListener {
+        void onDeleteClick(int i);
+    }
 
+    private onItemDeleteListener mOnItemDeleteListener;
+
+    public void setOnItemDeleteClickListener(onItemDeleteListener mOnItemDeleteListener) {
+        this.mOnItemDeleteListener = mOnItemDeleteListener;
+    }
+
+
+    /**
+     * 编辑按钮的监听接口
+     */
+    public interface onItemEditListener {
+        void onEditClick(int i);
+    }
+
+    private onItemEditListener mOnItemEditListener;
+
+    public void setOnItemEditClickListener(onItemEditListener mOnItemEditListener) {
+        this.mOnItemEditListener = mOnItemEditListener;
+    }
 
 }

@@ -15,7 +15,7 @@ android:orientation="vertical">
         android:layout_height="wrap_content"
         app:contentInsetStart="0dp">
         <Button
-            android:id="@+id/addQuestionPost_back"
+            android:id="@+id/editQuestionPost_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="10dp"
@@ -60,7 +60,7 @@ android:orientation="vertical">
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
                 <EditText
-                    android:id="@+id/et_addQuestionPostTitle"
+                    android:id="@+id/et_editQuestionPostTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -92,7 +92,7 @@ android:orientation="vertical">
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
                 <EditText
-                    android:id="@+id/et_addQuestionPostContent"
+                    android:id="@+id/et_editQuestionPostContent"
                     android:layout_below="@+id/tv_dkcontent"
                     android:layout_alignLeft="@+id/tv_dkcontent"
                     android:layout_width="match_parent"
@@ -111,11 +111,11 @@ android:orientation="vertical">
                 android:layout_marginBottom="15dp"/>
 
             <Button
-                android:id="@+id/bt_addquestionpost"
+                android:id="@+id/bt_editquestionpost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:text="发 布"/>
+                android:text="修 改"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

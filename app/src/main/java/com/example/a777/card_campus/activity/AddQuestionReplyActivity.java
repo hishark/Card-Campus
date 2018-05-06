@@ -1,32 +1,22 @@
 package com.example.a777.card_campus.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.Image;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
-import com.example.a777.card_campus.adapter.DaikeAdapter;
-import com.example.a777.card_campus.adapter.QuestionReplyAdapter;
 import com.example.a777.card_campus.bean.QuestionPost;
 import com.example.a777.card_campus.bean.User;
+import com.example.a777.card_campus.util.CurrentUserUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -34,13 +24,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -48,202 +37,134 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class QuestionPostDetailActivity extends AppCompatActivity {
-    TextView questionpostdetail_username,questionpostdetail_time,questionpostdetail_title,questionpostdetail_content;
+public class AddQuestionReplyActivity extends AppCompatActivity {
 
-    CircleImageView user_avatar;
-    ListView lv_reply;
-
-    FloatingActionButton addReply;
-    HashMap<String, Object> current_questionpost;
-    List<HashMap<String,Object>> QuestionPost;
-    List<List<HashMap<String,Object>>> QuestionReplys;
-    List<HashMap<String,Object>> currentPostReplys;
+    private static String addQuestionReplyURL="http://47.106.148.107:8080/Card-Campus-Server/addQuestionReply";
     private static String getQuestionReplysURL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionReplyList";
 
-    //下拉刷新
-    private SwipeRefreshLayout swipeRefreshLayout;//SwipeRefreshLayout下拉刷新控件
+    public static void a(){
 
+    }
+    private int reply_postid;
+    private int currentReplyNum;
+
+    EditText et_content;
+    Button back,add;
     private List<HashMap<String, Object>> replyResult;
-    private int current_reply_num;//用来算id的
+    String replyContent;
+    public static final String action = "jason.broadcast.action";
 
-
-
-
-    //Handler用来从子线程往主线程传输数据
     public Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             replyResult = (List)msg.obj;
+            Log.d("发广播的这里",replyResult.toString());
 
-            current_reply_num = replyResult.size();
-
-            addReply.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Toast.makeText(getApplicationContext(),current_reply_num+"",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(QuestionPostDetailActivity.this,AddQuestionReplyActivity.class);
-                    intent.putExtra("currentReplyNum",current_reply_num);
-                    intent.putExtra("reply_postId",Integer.parseInt(current_questionpost.get("bpost_id").toString()));
-                    startActivity(intent);
-                }
-            });
-
-
-
+            Intent intent = new Intent(action);
+            intent.putExtra("NewReplyResults", (Serializable)replyResult);
+            sendBroadcast(intent);
 
             super.handleMessage(msg);
         }
     };
 
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // TODO Auto-generated method stub
-            final List<HashMap<String,Object>> newReplyResults = (List<HashMap<String,Object>>)intent.getSerializableExtra("NewReplyResults");
-
-            Log.d("收广播的！",newReplyResults.toString());
-
-            int currentPostId = Integer.valueOf(current_questionpost.get("bpost_id").toString());
-
-            final List<HashMap<String,Object>> thisPostReplys = new ArrayList<HashMap<String, Object>>();
-
-            for(int i=0;i<newReplyResults.size();i++){
-                QuestionPost questionPost = (QuestionPost)newReplyResults.get(i).get("questionPost");
-                if(questionPost.getBpost_id()==currentPostId){
-                    thisPostReplys.add(newReplyResults.get(i));
-                }
+    public Handler handler1 = new Handler() {
+        public void handleMessage(Message msg) {
+            if(msg.what==1){
+                getQuestionReplyList();
             }
 
-            Log.d("绝望了",thisPostReplys.toString());
-
-            //下拉刷新
-            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    //TODO 刷新的时候获取数据
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            if(replyResult.size()==thisPostReplys.size()){
-                                swipeRefreshLayout.setRefreshing(false);
-                            }else{
-                                Log.d("看一下结果",thisPostReplys.size()+"");
-                                QuestionReplyAdapter questionReplyAdapter = new QuestionReplyAdapter(getApplicationContext(),thisPostReplys);
-                                lv_reply.setAdapter(questionReplyAdapter);
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-
-
-                        }
-                    }, 2000);
-                }
-            });
-
+            super.handleMessage(msg);
         }
-    };
-
-    protected void onDestroy() {
-        unregisterReceiver(broadcastReceiver);
-        super.onDestroy();
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question_post_detail);
+        setContentView(R.layout.activity_add_question_reply);
         getSupportActionBar().hide();
 
-        IntentFilter filter = new IntentFilter(AddQuestionReplyActivity.action);
-        registerReceiver(broadcastReceiver, filter);
+        initView();
 
-        /**
-         * 返回按钮
-         */
-        Button questionpost_back=(Button)this.findViewById(R.id.questionpost_detail_back);
-        questionpost_back.setOnClickListener(new View.OnClickListener() {
+        reply_postid=getIntent().getIntExtra("reply_postId",0);
+        currentReplyNum = getIntent().getIntExtra("currentReplyNum",0);
+
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replyContent = et_content.getText().toString().trim();
+                addPostToServer();
+                Toast.makeText(getApplicationContext(),"发表成功",Toast.LENGTH_SHORT).show();
+
+                finish();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-        /**
-         * 控件初始化
-         */
-        initView();
-
-
-        /**
-         * 获取到所有的帖子，以及帖子对应的所有回复
-         */
-        Intent intent = getIntent();
-        QuestionPost =  (List<HashMap<String,Object>>)intent.getSerializableExtra("QuestionPost");
-        QuestionReplys =  (List<List<HashMap<String,Object>>>)intent.getSerializableExtra("QuestionReplys");
-        int current_selected_item = intent.getIntExtra("currentItem",0);
-
-        Log.d("看一下传过去是什么",current_selected_item+"");
-
-        //Collections.reverse(QuestionPost);
-        //Collections.reverse(QuestionReplys);
-
-
-        current_questionpost = QuestionPost.get(current_selected_item);
-
-        User user = (User)current_questionpost.get("user");
-        String username = user.getUser_nickname();
-
-        String timestamp = current_questionpost.get("bpost_time").toString();
-        String post_time = timestamp.substring(0,timestamp.length()-2);
-
-        questionpostdetail_time.setText(post_time);
-        questionpostdetail_username.setText(username);
-        questionpostdetail_content.setText(current_questionpost.get("bpost_content").toString());
-        Glide.with(getApplicationContext()).load(user.getUser_avatar()).into(user_avatar);
-
-        currentPostReplys = QuestionReplys.get(current_selected_item);
-
-        QuestionReplyAdapter questionReplyAdapter = new QuestionReplyAdapter(getApplicationContext(),currentPostReplys);
-        lv_reply.setAdapter(questionReplyAdapter);
-
-        getQuestionReplyList();
-
-        //下拉刷新
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //TODO 刷新的时候获取数据
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 2000);
-            }
-        });
-
     }
 
     private void initView() {
-        questionpostdetail_username=(TextView)this.findViewById(R.id.questionpost_username);
-        questionpostdetail_time=(TextView)this.findViewById(R.id.questionpost_time);
-        questionpostdetail_title=(TextView)this.findViewById(R.id.questionpost_title);
-        questionpostdetail_content=(TextView)this.findViewById(R.id.questionpostdetail_content);
-
-
-
-        lv_reply = (ListView)this.findViewById(R.id.lv_questionpost_reply);
-
-        user_avatar = (CircleImageView)this.findViewById(R.id.questionpost_avatar);
-
-        addReply = (FloatingActionButton)this.findViewById(R.id.fab_addReply);
-
-        swipeRefreshLayout = (SwipeRefreshLayout)this.findViewById(R.id.refresh_reply);
-
-
+        et_content = (EditText)this.findViewById(R.id.et_addQuestionReplyContent);
+        back = (Button)this.findViewById(R.id.addQuestionReply_back);
+        add = (Button)this.findViewById(R.id.bt_addquestionreply);
     }
 
+    private void addPostToServer() {
+        //实例化OkHttpClient
+        OkHttpClient client = new OkHttpClient();
+        //创建表单请求体
+        FormBody.Builder formBody = new FormBody.Builder();
+
+        /**
+         * 传递键值对参数
+         * key一定要和LoginActivityAction里面的变量同名！！！一定要同名！！！
+         */
+        formBody.add("breply_id",String.valueOf(currentReplyNum+1));
+        formBody.add("breply_content",replyContent);
+        formBody.add("breply_time",String.valueOf(System.currentTimeMillis()));
+        formBody.add("user_sno", CurrentUserUtil.getCurrentUser().getUser_sno());
+        formBody.add("bpost_id",String.valueOf(reply_postid));
+
+        //创建Request对象
+        Request request = new Request.Builder()
+                .url(addQuestionReplyURL)
+                .post(formBody.build())
+                .build();
+
+        /**
+         * Get的异步请求，不需要跟同步请求一样开启子线程
+         * 但是回调方法还是在子线程中执行的
+         * 所以要用到Handler传数据回主线程更新UI
+         */
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            //回调的方法执行在子线程
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.isSuccessful()){
+
+                    //通过handler传递数据到主线程
+                    Message msg = new Message();
+
+                    msg.what = 1;
+                    handler1.sendMessage(msg);
+
+
+                }else{
+
+                }
+            }
+        });
+    }
 
     private void getQuestionReplyList() {
         //实例化OkHttpClient
@@ -378,6 +299,4 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

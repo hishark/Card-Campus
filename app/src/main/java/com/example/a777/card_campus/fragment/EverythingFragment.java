@@ -7,17 +7,21 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.activity.AddQuestionPostActivity;
+import com.example.a777.card_campus.activity.CurrentUserPostDetailActivity;
 import com.example.a777.card_campus.activity.DaikeActivity;
 import com.example.a777.card_campus.activity.DaikeDetailActivity;
 import com.example.a777.card_campus.activity.QuestionPostDetailActivity;
@@ -25,6 +29,7 @@ import com.example.a777.card_campus.adapter.DaikeAdapter;
 import com.example.a777.card_campus.adapter.QuestionPostAdapter;
 import com.example.a777.card_campus.bean.QuestionPost;
 import com.example.a777.card_campus.bean.User;
+import com.example.a777.card_campus.util.CurrentUserUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -35,6 +40,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,11 +52,18 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class EverythingFragment extends Fragment {
+public  class EverythingFragment extends Fragment {
     //定义成员变量
     private View view;
     private ListView lv_question;
-    //买了个服务器 ip为47.106.148.107
+    private LinearLayout question_top;
+    private TextView CurrentUserquestionNumber;
+
+    //下拉刷新
+    private SwipeRefreshLayout mRefreshLayout;//SwipeRefreshLayout下拉刷新控件
+
+
+    //买了个服务器 ip为47.106.148.107 模拟器是10.0.2.2
     private static String URL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionPostList";
     private List<HashMap<String, Object>> QuestionPostResult;
     private static String reply_URL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionPostReplyNum";
@@ -58,60 +72,6 @@ public class EverythingFragment extends Fragment {
     private int QuestionReplyNum[];
     private int count=0;
     private int count2=1;
-    /*//Handler用来从子线程往主线程传输数据
-    private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-
-            QuestionPostResult = (List)msg.obj;
-            Log.d("handler",QuestionPostResult.size()+"");
-
-            QuestionReplyNum = new int[QuestionPostResult.size()+1];
-
-
-            for(int i=0;i<QuestionPostResult.size();i++){
-                getQuestionPostReplyNum(Integer.parseInt(QuestionPostResult.get(i).get("bpost_id").toString()));
-            }
-
-
-
-
-            super.handleMessage(msg);
-        }
-    };
-
-
-    private Handler handler1 = new Handler() {
-        public void handleMessage(Message msg) {
-
-            QuestionReplyResult = (List)msg.obj;
-
-            *//**
-             * QuestionReplyNum就成功按照帖子的id记下了每个帖子的回复数量
-             *//*
-            QuestionReplyNum[msg.what] = ((List)msg.obj).size();
-            count++;
-
-            if(count==QuestionReplyNum.length-1){
-                //然后再加载到适配器里去
-
-                //控件初始化
-                initView();
-
-                //适配器一定要写在这里，不然会出现空指针问题
-                QuestionPostAdapter questionPostAdapter = new QuestionPostAdapter(getActivity().getApplicationContext(),QuestionPostResult,QuestionReplyNum);
-                lv_question.setAdapter(questionPostAdapter);
-            }
-
-
-            Log.d("handler1:ReplyNum",msg.what+"===="+QuestionReplyNum[msg.what]+"");
-
-            Log.d("handler1",QuestionReplyResult.size()+"");
-
-
-            super.handleMessage(msg);
-        }
-    };*/
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,30 +88,33 @@ public class EverythingFragment extends Fragment {
 
 
 
-        /**
-         * 悬浮球的点击事件
-         */
-        FloatingActionButton fab = (FloatingActionButton)view.findViewById(R.id.fab_questionpost_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(),"test",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity().getApplicationContext(),AddQuestionPostActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
         return view;
     }
 
+    public void setTopNum(){
+        List<HashMap<String, Object>> currentUserPost = new ArrayList<HashMap<String, Object>>();
+        ArrayList<Integer> currentUserPostId = new ArrayList<>();
 
+        for(int i=0;i<QuestionPostResult.size();i++){
+            User user= (User)QuestionPostResult.get(i).get("user");
+            if(user.getUser_nickname()== CurrentUserUtil.getCurrentUser().getUser_nickname()||user.getUser_nickname().equals(CurrentUserUtil.getCurrentUser().getUser_nickname())){
+                currentUserPost.add(QuestionPostResult.get(i));
+                currentUserPostId.add(Integer.parseInt(QuestionPostResult.get(i).get("bpost_id").toString()));
+            }
+        }
 
-    private void getDataFromClient_setListView() {
+        int currentUserReplyNum[] = new int[currentUserPost.size()+1];
+        for(int i=1;i<currentUserReplyNum.length;i++){
+            currentUserReplyNum[i] = QuestionReplyNum[currentUserPostId.get(i-1)];
+        }
+
+        CurrentUserquestionNumber.setText(" "+(currentUserReplyNum.length-1)+" ");
+
+    }
+
+    public void getDataFromClient_setListView() {
         final Handler handler1 = new Handler() {
             public void handleMessage(Message msg) {
-
                 /**
                  * QuestionReplyResult接收来自子线程从服务器查询到的帖子回复数据
                  */
@@ -176,22 +139,75 @@ public class EverythingFragment extends Fragment {
                     //控件初始化
                     initView();
 
-                    //适配器一定要写在这里，不然会出现空指针问题
-                    QuestionPostAdapter questionPostAdapter = new QuestionPostAdapter(getActivity().getApplicationContext(),QuestionPostResult,QuestionReplyNum);
-                    lv_question.setAdapter(questionPostAdapter);
+                    //发帖一般最新的在最上面，用这句话就可以让帖子倒序显示
+                    //final List<HashMap<String, Object>> temp1 = QuestionPostResult;
+                    Collections.reverse(QuestionPostResult);
+                    //final List<List<HashMap<String, Object>>> temp2 = QuestionReplyResults;
+                    Collections.reverse(QuestionReplyResults);
 
+                    //适配器一定要写在这里，不然会出现空指针问题
+                    final QuestionPostAdapter questionPostAdapter = new QuestionPostAdapter(getActivity().getApplicationContext(),QuestionPostResult,QuestionReplyNum);
+                    lv_question.setAdapter(questionPostAdapter);
 
                     lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            //Toast.makeText(getContext(),i+"",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getActivity().getApplicationContext(),QuestionPostDetailActivity.class);
+
                             intent.putExtra("QuestionPost",(Serializable)QuestionPostResult);
                             intent.putExtra("QuestionReplys",(Serializable)QuestionReplyResults);
                             intent.putExtra("currentItem",i);
                             startActivity(intent);
                         }
                     });
+
+
+                    question_top.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //Toast.makeText(getActivity().getApplicationContext(),"点这进个人界面",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity().getApplicationContext(),CurrentUserPostDetailActivity.class);
+                            intent.putExtra("ReplyNum",QuestionReplyNum);
+                            intent.putExtra("QuestionPost",(Serializable)QuestionPostResult);
+                            intent.putExtra("QuestionReplys",(Serializable)QuestionReplyResults);
+                            startActivity(intent);
+                        }
+                    });
+
+                    /**
+                     * 悬浮球的点击事件
+                     */
+                    FloatingActionButton fab = (FloatingActionButton)view.findViewById(R.id.fab_questionpost_add);
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //Toast.makeText(getContext(),"test",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity().getApplicationContext(),AddQuestionPostActivity.class);
+                            intent.putExtra("PostNum",QuestionPostResult.size());
+                            startActivity(intent);
+                        }
+                    });
+
+                    //下拉刷新
+                    mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                                //TODO 刷新的时候获取数据
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //记得给计数器初始化
+                                        count=0;
+                                        getDataFromClient_setListView();
+                                        mRefreshLayout.setRefreshing(false);
+                                    }
+                                }, 1000);
+                        }
+                    });
+                    questionPostAdapter.notifyDataSetChanged();
+                    lv_question.setAdapter(questionPostAdapter);
+
+                    setTopNum();
                 }
 
                 super.handleMessage(msg);
@@ -202,6 +218,7 @@ public class EverythingFragment extends Fragment {
          final Handler handler = new Handler() {
             public void handleMessage(Message msg) {
 
+                //从0开始
                 QuestionPostResult = (List)msg.obj;
 
 
@@ -222,8 +239,6 @@ public class EverythingFragment extends Fragment {
                 }
 
 
-
-
                 super.handleMessage(msg);
             }
         };
@@ -235,11 +250,15 @@ public class EverythingFragment extends Fragment {
         getQuestionPostList(handler);
     }
 
+
     /**
      * 初始化控件
      */
     private void initView() {
         lv_question = (ListView)view.findViewById(R.id.lv_question);
+        question_top = (LinearLayout)view.findViewById(R.id.question_top);
+        CurrentUserquestionNumber = (TextView)view.findViewById(R.id.tv_questionNumber);
+        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.mRefreshLayout);
     }
 
     private void getQuestionPostList(final Handler handler) {
@@ -420,6 +439,8 @@ public class EverythingFragment extends Fragment {
                     //通过handler传递数据到主线程
                     Message msg = new Message();
                     msg.obj = questionReplys;
+                    //如果要倒转，这里就等于size-id-1
+                    //QuestionPostResult.size()+1-bpost_id
                     msg.what = bpost_id;
                     //QuestionReplyNum.add(questionReplys.size());
                     Log.d("访问服务器的子线程里得到的数据：","Post的id："+bpost_id+"该Post的回复数"+questionReplys.size()+"");
@@ -430,12 +451,6 @@ public class EverythingFragment extends Fragment {
                 }
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        getDataFromClient_setListView();
-        super.onResume();
     }
 
 }

@@ -1,10 +1,15 @@
 package com.example.a777.card_campus.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,14 +24,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.a777.card_campus.bean.User;
 import com.example.a777.card_campus.fragment.BookFragment;
 import com.example.a777.card_campus.fragment.EverythingFragment;
 import com.example.a777.card_campus.fragment.HomepageFragment;
 import com.example.a777.card_campus.fragment.InsteadFragment;
 import com.example.a777.card_campus.fragment.LovewallFragment;
 import com.example.a777.card_campus.R;
+import com.example.a777.card_campus.util.CurrentUserUtil;
 
 import org.w3c.dom.Text;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -80,9 +89,19 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         /**
-         * 将侧滑栏中的HeaderView的名字设置成当前登录用户的真实姓名
+         * 教务在线崩了，先人为设置一个用户
+         */
+        /*User user = new User();
+        user.setUser_sno("201526702054");
+        user.setUser_nickname("张小琪");
+        user.setUser_avatar("http://p81fp7gd5.bkt.clouddn.com/dd72f306ly1fqv27v5dkmj207n07ndi4.jpg");
+        CurrentUserUtil.user = user;*/
+
+        /**
+         * 将侧滑栏中的HeaderView的名字设置成当前登录用户的昵称，并显示头像
          */
         View headerView = navigationView.getHeaderView(0);
+
         //获取从LoginActivity传来的姓名
         String userName = getIntent().getExtras().getString("student_name");
         String avatar = getIntent().getExtras().getString("student_avatar");
@@ -90,6 +109,13 @@ public class MainActivity extends AppCompatActivity
         CircleImageView ci_avatar = (CircleImageView)headerView.findViewById(R.id.nav_header_avatar);
         tv_username.setText(userName);
         Glide.with(getApplicationContext()).load(avatar).into(ci_avatar);
+
+        ci_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"这里可以换头像啦",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -197,4 +223,6 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 }

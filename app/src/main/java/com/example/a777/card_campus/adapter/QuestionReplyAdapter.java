@@ -1,6 +1,7 @@
 package com.example.a777.card_campus.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.bean.User;
+import com.example.a777.card_campus.constant.Constant;
 
 import org.w3c.dom.Text;
 
@@ -60,13 +62,16 @@ public class QuestionReplyAdapter extends BaseAdapter {
 
         Glide.with(context).load(user.getUser_avatar()).into(avatar);
         tv_username.setText(username);
+        tv_username.setTextColor(Color.parseColor("#E8E8E8"));
         tv_replycontent.setText(replyList.get(i).get("breply_content").toString());
+        tv_replycontent.setTextColor(Color.parseColor("#E8E8E8"));
 
         String timestamp = replyList.get(i).get("breply_time").toString();
         String post_time = timestamp.substring(0,timestamp.length()-2);
 
 
         tv_replytime.setText(post_time);
+        tv_replytime.setTextColor(Color.parseColor("#E8E8E8"));
 
         return ll;
     }

@@ -70,6 +70,8 @@
                     android:layout_alignTop="@+id/tv_dktile"/>
             </RelativeLayout>
             <View
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#607D8B"
@@ -100,6 +102,8 @@
                     android:minLines="3"/>
             </RelativeLayout>
             <View
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#607D8B"
@@ -128,6 +132,8 @@
                     android:text="代课"/>
             </RelativeLayout>
             <View
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#607D8B"
@@ -155,6 +161,8 @@
                     android:layout_alignTop="@+id/tv_dkqq"/>
             </RelativeLayout>
             <View
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#607D8B"

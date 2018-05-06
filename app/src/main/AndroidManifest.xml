@@ -11,9 +11,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -21,12 +21,10 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,7 +40,10 @@
         <activity android:name=".activity.DaikeDetailActivity" />
         <activity android:name=".activity.SendDaikepostActivity" />
         <activity android:name=".activity.AddQuestionPostActivity" />
-        <activity android:name=".activity.QuestionPostDetailActivity"></activity>
+        <activity android:name=".activity.QuestionPostDetailActivity" />
+        <activity android:name=".activity.CurrentUserPostDetailActivity" />
+        <activity android:name=".activity.EditQuestionPostActivity" />
+        <activity android:name=".activity.AddQuestionReplyActivity"></activity>
     </application>
 
 </manifest>
