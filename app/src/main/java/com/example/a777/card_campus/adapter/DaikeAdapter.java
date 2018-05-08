@@ -53,6 +53,15 @@ public class DaikeAdapter extends BaseAdapter {
         TextView tv_username = (TextView)ll.findViewById(R.id.daike_username);
         TextView tv_daike_content = (TextView)ll.findViewById(R.id.daike_title);
 
+        ImageView im_solve=(ImageView)ll.findViewById(R.id.daike_issolved);
+
+        int state;
+        state=Integer.parseInt(list.get(i).get("is_solved").toString());
+        if(state==1) {
+            im_solve.setImageResource(R.drawable.jiejue);
+        }else{
+            im_solve.setImageResource(R.drawable.question);
+        }
         tv_username.setTextColor(Color.parseColor("#757575"));
         tv_daike_content.setTextColor(Color.parseColor("#757575"));
 

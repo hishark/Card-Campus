@@ -206,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
                         msg.what = Constant.ADD_NEW_USER;
                         mHandler.sendMessage(msg);
                     }else{
-                        Log.d("用户测试","烦死啦！！");
+                        //Log.d("用户测试","烦死啦！！");
 
                         //数据库存在当前登录用户，那就把拿到该用户，把头像名字设置到侧滑栏上
                         try{

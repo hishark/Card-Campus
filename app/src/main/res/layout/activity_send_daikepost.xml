@@ -149,16 +149,80 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:textColor="#282828"
-                    android:text="联系方式："/>
-                <EditText
+                    android:text="联系方式："
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:id="@+id/tv_tishi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_dkqq"
+                    android:layout_alignBottom="@+id/tv_dkqq"
+                    android:layout_alignTop="@+id/tv_dkqq"
+                    android:gravity="center"
+                    android:text="(至少填一个)"
+                    android:textSize="12sp" />
+                <!--<EditText
                     android:id="@+id/senddaike_qq"
+                    android:layout_below="@+id/tv_dkqq"
+                    android:layout_alignLeft="@+id/tv_dkqq"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:drawableBottom="@drawable/line"
                     android:padding="10dp"
-                    android:layout_toRightOf="@+id/tv_dkqq"
-                    android:layout_alignBottom="@+id/tv_dkqq"
-                    android:layout_alignTop="@+id/tv_dkqq"/>
+                    android:hint="QQ"
+                    android:inputType="number"
+                    android:maxLength="12"
+                    />
+                <EditText
+                    android:id="@+id/senddaike_phone"
+                    android:layout_below="@+id/senddaike_qq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:paddingLeft="10dp"
+                    android:hint="phone"
+                    android:inputType="phone"
+                    android:maxLength="11" />-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/qq"
+                    android:layout_alignLeft="@+id/tv_dkqq"
+                    android:layout_below="@+id/tv_dkqq">
+                    <EditText
+                        android:id="@+id/senddaike_qq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:hint="QQ"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:singleLine="true"
+                        android:textColorHint="#607D8B" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/phone"
+                    android:layout_below="@+id/qq"
+                    android:layout_alignLeft="@+id/qq">
+                    <EditText
+                        android:id="@+id/senddaike_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:hint="phone"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:singleLine="true"
+                        android:textColorHint="#607D8B" />
+                </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
             <View
                 android:layout_marginLeft="10dp"
@@ -169,6 +233,7 @@
                 android:layout_marginBottom="15dp"/>
 
             <Button
+                android:id="@+id/bt_senddaike"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

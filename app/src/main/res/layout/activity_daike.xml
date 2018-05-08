@@ -38,11 +38,16 @@
             </FrameLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:id="@+id/lv_daikes"/>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:id="@+id/refreshlayout_daike"
+            android:layout_height="match_parent">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:id="@+id/lv_daikes"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/daike_send"

@@ -38,7 +38,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="#757575"/>
 
                 <ImageView
                     android:id="@+id/daike_issolved"
@@ -51,7 +52,8 @@
                 android:id="@+id/daike_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:textColor="#757575"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
