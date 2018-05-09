@@ -26,8 +26,8 @@ public class SendDaikepostActivity extends AppCompatActivity {
 
     //private static String URL="http://10.0.2.2:8080/Card-Campus-Server/addDaike";
     //private static String linkWayURL="http://10.0.2.2:8080/Card-Campus-Server/insertLinkWay";
-    private static String URL="http://192.168.137.1:8080/Card-Campus-Server/addDaike";
-    private static String linkWayURL="http://192.168.137.1:8080/Card-Campus-Server/insertLinkWay";
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/addDaike";
+    private static String linkWayURL="http://47.106.148.107:8080/Card-Campus-Server/insertLinkWay";
     private EditText senddk_title,senddk_content,senddk_qq,senddk_tel;
     private TextView tv_type;
     private Button daike_back,daike_send;

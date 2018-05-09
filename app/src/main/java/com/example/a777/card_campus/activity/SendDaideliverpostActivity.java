@@ -25,8 +25,8 @@ import okhttp3.Response;
 
 public class SendDaideliverpostActivity extends AppCompatActivity {
 
-    private static String URL="http://192.168.137.1:8080/Card-Campus-Server/addDaideliver";
-    private static String linkWayURL="http://192.168.137.1:8080/Card-Campus-Server/insertLinkWay";
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/addDaideliver";
+    private static String linkWayURL="http://47.106.148.107:8080/Card-Campus-Server/insertLinkWay";
     private EditText senddeliver_title,senddeliver_content,senddeliver_qq,senddeliver_tel;
     private TextView tv_type;
     private Button daideliver_back,daideliver_send;

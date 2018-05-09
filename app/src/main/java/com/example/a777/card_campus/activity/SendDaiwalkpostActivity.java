@@ -27,8 +27,8 @@ public class SendDaiwalkpostActivity extends AppCompatActivity {
 
     //private static String URL="http://10.0.2.2:8080/Card-Campus-Server/addDaiactivity";
     //private static String linkWayURL="http://10.0.2.2:8080/Card-Campus-Server/insertLinkWay";
-    private static String URL="http://192.168.137.1:8080/Card-Campus-Server/addDaiwalk";
-    private static String linkWayURL="http://192.168.137.1:8080/Card-Campus-Server/insertLinkWay";
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/addDaiwalk";
+    private static String linkWayURL="http://47.106.148.107:8080/Card-Campus-Server/insertLinkWay";
     private EditText senddw_title,senddw_content,senddw_qq,senddw_tel;
     private TextView tv_type;
     private Button daiwalk_back,daiwalk_send;

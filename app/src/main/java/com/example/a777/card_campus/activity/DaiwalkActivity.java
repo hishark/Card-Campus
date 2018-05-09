@@ -46,9 +46,9 @@ public class DaiwalkActivity extends AppCompatActivity {
     //模拟器用10.0.2.2，真机用无线局域网适配器ip——192.168.137.1
     //买了个服务器 ip为47.106.148.107
     //private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaiwalkList";
-    private static String URL="http://192.168.137.1:8080/Card-Campus-Server/getDaiwalkList";
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/getDaiwalkList";
     //private static String URL="http://192.168.137.91:8080/Card-Campus-Server/getDaiactivityList";
-    private static String daiNumURL="http://192.168.137.1:8080/Card-Campus-Server/daiNum";
+    private static String daiNumURL="http://47.106.148.107:8080/Card-Campus-Server/daiNum";
 
     private int current_post_Num;
 

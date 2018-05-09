@@ -27,8 +27,8 @@ public class SendDaifoodpostActivity extends AppCompatActivity {
 
     //private static String URL="http://10.0.2.2:8080/Card-Campus-Server/addDaifood";
     //private static String linkWayURL="http://10.0.2.2:8080/Card-Campus-Server/insertLinkWay";
-    private static String URL="http://192.168.137.1:8080/Card-Campus-Server/addDaifood";
-    private static String linkWayURL="http://192.168.137.1:8080/Card-Campus-Server/insertLinkWay";
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/addDaifood";
+    private static String linkWayURL="http://47.106.148.107:8080/Card-Campus-Server/insertLinkWay";
     private EditText senddf_title,senddf_content,senddf_qq,senddf_tel;
     private TextView tv_type;
     private Button daifood_back,daifood_send;

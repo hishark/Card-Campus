@@ -25,8 +25,8 @@ import okhttp3.Response;
 
 public class SendDaibuypostActivity extends AppCompatActivity {
 
-    private static String URL="http://192.168.137.1:8080/Card-Campus-Server/addDaibuy";
-    private static String linkWayURL="http://192.168.137.1:8080/Card-Campus-Server/insertLinkWay";
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/addDaibuy";
+    private static String linkWayURL="http://47.106.148.107:8080/Card-Campus-Server/insertLinkWay";
     private EditText senddb_title,senddb_content,senddb_qq,senddb_tel;
     private TextView tv_type;
     private Button daibuy_back,daibuy_send;

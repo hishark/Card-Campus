@@ -47,8 +47,8 @@ public class DaifoodActivity extends AppCompatActivity {
     //模拟器用10.0.2.2，真机用无线局域网适配器ip——192.168.137.1
     //买了个服务器 ip为47.106.148.107
     //private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaifoodList";
-    private static String DFLISTURL="http://192.168.137.1:8080/Card-Campus-Server/getDaifoodList";
-    private static String daiNumURL="http://192.168.137.1:8080/Card-Campus-Server/daiNum";
+    private static String DFLISTURL="http://47.106.148.107:8080/Card-Campus-Server/getDaifoodList";
+    private static String daiNumURL="http://47.106.148.107:8080/Card-Campus-Server/daiNum";
     private List<HashMap<String, Object>> daifoodResult;
     //Handler用来从子线程往主线程传输数据
     private Handler handler = new Handler() {
