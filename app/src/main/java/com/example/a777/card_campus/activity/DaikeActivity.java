@@ -57,6 +57,7 @@ public class DaikeActivity extends AppCompatActivity {
     private static String daiNumURL="http://192.168.137.1:8080/Card-Campus-Server/daiNum";
     //private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getDaikeList";
     private List<HashMap<String, Object>> daikeResult;
+    private int current_post_Num;
     //Handler用来从子线程往主线程传输数据
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -143,7 +144,6 @@ public class DaikeActivity extends AppCompatActivity {
         });
     }
 
-    private int current_post_Num;
     private void searchDaiPostCount() {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder().build();

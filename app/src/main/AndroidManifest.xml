@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 拨号权限 -->
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -24,7 +24,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_main">
@@ -46,7 +46,17 @@
         <activity android:name=".activity.QuestionPostDetailActivity" />
         <activity android:name=".activity.CurrentUserPostDetailActivity" />
         <activity android:name=".activity.EditQuestionPostActivity" />
-        <activity android:name=".activity.AddQuestionReplyActivity"></activity>
+        <activity android:name=".activity.AddQuestionReplyActivity" />
+        <activity android:name=".activity.SendDaifoodpostActivity" />
+        <activity android:name=".activity.DaifoodDetailActivity" />
+        <activity android:name=".activity.DaiactivityDetailActivity" />
+        <activity android:name=".activity.SendDaiactivitypostActivity" />
+        <activity android:name=".activity.DaiwalkDetailActivity" />
+        <activity android:name=".activity.SendDaiwalkpostActivity" />
+        <activity android:name=".activity.DaibuyDetailActivity" />
+        <activity android:name=".activity.SendDaibuypostActivity" />
+        <activity android:name=".activity.DaideliverDetailActivity" />
+        <activity android:name=".activity.SendDaideliverpostActivity"></activity>
     </application>
 
 </manifest>

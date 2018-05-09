@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp">
                 <TextView
-                    android:id="@+id/tv_dktile"
+                    android:id="@+id/tv_dktitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -65,9 +65,9 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:background="@null"
-                    android:layout_toRightOf="@+id/tv_dktile"
-                    android:layout_alignBottom="@+id/tv_dktile"
-                    android:layout_alignTop="@+id/tv_dktile"/>
+                    android:layout_toRightOf="@+id/tv_dktitle"
+                    android:layout_alignBottom="@+id/tv_dktitle"
+                    android:layout_alignTop="@+id/tv_dktitle"/>
             </RelativeLayout>
             <View
                 android:layout_marginLeft="10dp"
