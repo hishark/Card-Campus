@@ -106,7 +106,7 @@ public class SendDaikepostActivity extends AppCompatActivity {
                     });
 
                     addDKPostToServer();
-                    //Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
                     finish();
                 }
 

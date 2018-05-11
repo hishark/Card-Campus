@@ -105,7 +105,7 @@ public class SendDaideliverpostActivity extends AppCompatActivity {
                     });
 
                     addDeliverPostToServer();
-                    //Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
                     finish();
                 }
 

@@ -103,7 +103,7 @@ public class SendDaibuypostActivity extends AppCompatActivity {
                     });
 
                     addDBPostToServer();
-                    //Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
                     finish();
                 }
 

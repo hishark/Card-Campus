@@ -107,7 +107,7 @@ public class SendDaifoodpostActivity extends AppCompatActivity {
                     });
 
                     addDFPostToServer();
-                    //Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"发布成功",Toast.LENGTH_SHORT).show();
                     finish();
                 }
 

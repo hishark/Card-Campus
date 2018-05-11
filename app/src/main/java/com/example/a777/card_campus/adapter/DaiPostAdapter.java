@@ -69,7 +69,8 @@ public class DaiPostAdapter extends BaseAdapter {
 
         //tv_username.setText(username);
         String time=list.get(i).get("dpost_time").toString();
-        tv_posttime.setText(time);
+        String post_time = time.substring(0,time.length()-2);
+        tv_posttime.setText(post_time);
 
         String title = list.get(i).get("dpost_title").toString();
         tv_title.setText(title);
