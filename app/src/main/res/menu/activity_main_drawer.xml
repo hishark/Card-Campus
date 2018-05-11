@@ -22,6 +22,10 @@
             android:id="@+id/nav_ErShouShu"
             android:icon="@drawable/ershoushu"
             android:title="二手书" />
+        <item
+            android:id="@+id/nav_MyPost"
+            android:icon="@drawable/post"
+            android:title="我的帖子" />
     </group>
 
     <item android:title="其他">

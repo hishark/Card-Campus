@@ -31,6 +31,7 @@ import com.example.a777.card_campus.fragment.HomepageFragment;
 import com.example.a777.card_campus.fragment.InsteadFragment;
 import com.example.a777.card_campus.fragment.LovewallFragment;
 import com.example.a777.card_campus.R;
+import com.example.a777.card_campus.fragment.MyPostFragment;
 import com.example.a777.card_campus.util.CurrentUserUtil;
 
 import org.w3c.dom.Text;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     EverythingFragment everythingFragment = new EverythingFragment();
     LovewallFragment lovewallFragment = new LovewallFragment();
     BookFragment bookFragment = new BookFragment();
+    MyPostFragment myPostFragment = new MyPostFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +183,8 @@ public class MainActivity extends AppCompatActivity
             replaceFragment(lovewallFragment);
         } else if (id == R.id.nav_ErShouShu) {
             replaceFragment(bookFragment);
+        } else if(id == R.id.nav_MyPost){
+            replaceFragment(myPostFragment);
         } else if (id == R.id.nav_Setting) {
             //登录界面放到这测试一下
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);

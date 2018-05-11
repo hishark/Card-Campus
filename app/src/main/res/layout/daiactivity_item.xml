@@ -43,8 +43,8 @@
 
                 <ImageView
                     android:id="@+id/daiactivity_issolved"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/question" />
             </LinearLayout>
 
