@@ -27,11 +27,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,9 +47,9 @@ import okhttp3.Response;
 
 public class LovewallFragment extends Fragment {
 
-
-    private String URL="http://192.168.137.1:8080/Card-Campus-Server/getLovePostList";
-    private String REPLYURL="http://192.168.137.1:8080/Card-Campus-Server/getLoveReplyNum";
+    //真机地址192.168.137.1 模拟器地址10.0.2.2
+    private String URL="http://10.0.2.2:8080/Card-Campus-Server/getLovePostList";
+    private String REPLYURL="http://10.0.2.2:8080/Card-Campus-Server/getLoveReplyNum";
     //定义成员变量
     private View view;
     //标签云
@@ -58,7 +62,15 @@ public class LovewallFragment extends Fragment {
     HashMap<String, Object> lovepost=null;
     private List<List<HashMap<String, Object>>> LoveReplyResults;
     //private List<HashMap<String,Object>> lovereplyResult;
+
+    //这个实体类存储了一个帖子的id、所有回复以及回复数量
     MyEntity lovereplyResult;
+
+    //那就需要一个集合来存储所有的帖子对应的这个实体类
+    Set<MyEntity> allReplys = new HashSet<>();
+
+
+
 
     //表白标签云的适配器
     LovewallAdapter lovewallAdapter;
@@ -95,6 +107,21 @@ public class LovewallFragment extends Fragment {
     private Handler handler1=new Handler(){
         public void handleMessage(Message msg){
             lovereplyResult = (MyEntity) msg.obj;
+
+            //把所有的回复结果存入allReplys
+            allReplys.add(lovereplyResult);
+            if(allReplys.size()==lovepostResult.size()){
+
+                Iterator<MyEntity> it = allReplys.iterator();
+                while(it.hasNext()){
+                    MyEntity temp = it.next();
+                    Log.d("Set-postid",temp.getPostId());
+                    Log.d("Set-replys",temp.getReplys().toString());
+                    Log.d("Set-replyNum",temp.getReplyNum()+"");
+                }
+
+            }
+
             lovewallAdapter = new LovewallAdapter(getActivity().getApplication(),lovepostResult,lovereplyResult.getReplys());
             Log.d("结果集的大小",String.valueOf(lovereplyResult.getReplys().size()));
             Log.d("wwwa",lovereplyResult.getPostId());
@@ -113,44 +140,36 @@ public class LovewallFragment extends Fragment {
 
 
             tagCloudView.setAdapter(lovewallAdapter);
+            /**
+             * 在点击标签云的某一项时应该实现加载该表白的详情以及所有评论内容
+             */
             tagCloudView.setOnTagClickListener(new TagCloudView.OnTagClickListener() {
                 @Override
                 public void onItemClick(ViewGroup parent, View view, int i) {
                     Intent intent = new Intent(getActivity().getApplication(),LovePostDetailActivity.class);
-                    //HashMap<String, Object> current_post=(HashMap<String, Object>)match_item.get("post");
-                    //HashMap<String, Object> current_reply=(HashMap<String, Object>)match_item.get("reply");
-                   /* List<HashMap<String, Object>> current_post=(List<HashMap<String, Object>>)match_item.get("post");
-                    List<HashMap<String, Object>> current_reply=(List<HashMap<String, Object>>)match_item.get("reply");
-                    int current_num=(int) match_item.get("number");
-                    String current_id=(String)match_item.get("id");
-
-                    if (lovepostResult.get(i).get("love_id").equals(current_id)){
-                        intent.putExtra("lovepost", lovepostResult.get(i));
-                        intent.putExtra("replys",(Serializable)current_reply);
-                        intent.putExtra("num",current_num);
-                    }else{
-
-                    }*/
 
                     String current_id=lovepostResult.get(i).get("love_id").toString();
                     String check_id=lovereplyResult.getPostId();
-                    Log.d("kkkk",current_id);
-                    Log.d("kkkk",check_id);
-                    Log.d("cnm",String.valueOf(i));
+
+                    Log.d("看一下选中表白的id",current_id);
+
                     intent.putExtra("lovepost", lovepostResult.get(i));
-                    for(int j=0;j<lovepostResult.size();j++) {
-                        if (current_id.equals(check_id)) {
 
-                            intent.putExtra("num", lovereplyResult.getReplyNum());
-
-                        } else {
-                            if(!(lovereplyResult.getReplys().listIterator().next().equals(""))) {
-                                Log.d("ttt", lovereplyResult.getReplys().listIterator().next().toString());
-
-                                Log.d("ttt",check_id);
-                            }
+                    /**
+                     * 已经拿到了选中的表白帖子的id，然后从allReplys中根据id取出相应的回复
+                     */
+                    List<HashMap<String, Object>> current_replys = new ArrayList<HashMap<String, Object>>();
+                    Iterator<MyEntity> it = allReplys.iterator();
+                    while(it.hasNext()){
+                        MyEntity temp = it.next();
+                        if(temp.getPostId()==current_id){
+                            current_replys = temp.getReplys();
                         }
                     }
+
+                    intent.putExtra("current_loveReplys", (Serializable)current_replys);
+                    intent.putExtra("num", current_replys.size());
+
                     startActivity(intent);
                 }
             });
@@ -314,6 +333,8 @@ public class LovewallFragment extends Fragment {
                             loveReply.put("lreply_time",trueTime);
 
                             loveReplys.add(loveReply);
+
+
                         }
 
 

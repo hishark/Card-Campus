@@ -30,7 +30,8 @@ import okhttp3.Response;
 
 public class SendLoveActivity extends AppCompatActivity {
 
-    private static String URL="http://192.168.137.1:8080/Card-Campus-Server/addLovepost";
+    //真机地址192.168.137.1 模拟器地址10.0.2.2
+    private static String URL="http://10.0.2.2:8080/Card-Campus-Server/addLovepost";
     private Button back,send;
     private EditText et_title,et_content;
     private RadioGroup rg_state;

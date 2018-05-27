@@ -2,6 +2,7 @@ package com.example.a777.card_campus.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -53,15 +54,17 @@ public class LoveReplyAdapter extends BaseAdapter {
         TextView tv_replycontent = (TextView)ll.findViewById(R.id.lovereply_content);
         TextView tv_replytime = (TextView)ll.findViewById(R.id.lovereply_time);
 
+        //显示评论人的头像、用户名、回复时间、回复内容
         User user = (User)replyList.get(i).get("user");
         String username = user.getUser_nickname();
-        Glide.with(context).load(user.getUser_avatar()).into(avatar);
-        tv_username.setText(username);
+        Glide.with(context).load("http://p81fp7gd5.bkt.clouddn.com/useravatar.png").into(avatar);
+        tv_username.setText("匿名用户");
         tv_username.setTextColor(Color.parseColor("#E8E8E8"));
 
         String timestamp = replyList.get(i).get("lreply_time").toString();
         String post_time = timestamp.substring(0,timestamp.length()-2);
         tv_replytime.setText(post_time);
+        Log.d("time",post_time);
         tv_replytime.setTextColor(Color.parseColor("#E8E8E8"));
 
         tv_replycontent.setText(replyList.get(i).get("lreply_content").toString());

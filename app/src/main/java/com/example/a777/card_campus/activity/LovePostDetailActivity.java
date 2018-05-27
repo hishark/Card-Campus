@@ -3,6 +3,7 @@ package com.example.a777.card_campus.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -10,22 +11,36 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.example.a777.card_campus.R;
+import com.example.a777.card_campus.adapter.LoveReplyAdapter;
+import com.example.a777.card_campus.bean.LovePost;
+import com.example.a777.card_campus.bean.LoveReply;
+import com.example.a777.card_campus.bean.QuestionPost;
+import com.example.a777.card_campus.bean.User;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class LovePostDetailActivity extends AppCompatActivity {
 
-    private String URL="http://192.168.137.1:8080/Card-Campus-Server/getLovePostList";
+    //真机地址192.168.137.1
+    private String URL="http://10.0.2.2:8080/Card-Campus-Server/getLovePostList";
     private Button loveone_back;
     private TextView title,content,name,time,replynum,send;
     private EditText et_comment;
     private LinearLayout llCommentTrue,llCommentFalse,click_comment;
+    private ListView lv_allReply;
 
 
     @Override
@@ -99,6 +114,21 @@ public class LovePostDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        /**
+         * 告白评论加载
+         */
+        List<HashMap<String, Object>> current_lovereplys = new ArrayList<>();
+        current_lovereplys =  (List<HashMap<String,Object>>)getIntent().getSerializableExtra("current_loveReplys");
+        Log.d("看一下传过来没有哦",current_lovereplys.toString());
+        //此时就得到了所有的回复
+        //Log.d("看一下传过来的回复内容",current_lovereplys.get(0).get("lreply_content").toString());
+        LoveReplyAdapter loveReplyAdapter = new LoveReplyAdapter(getApplicationContext(),current_lovereplys);
+        lv_allReply.setAdapter(loveReplyAdapter);
+
+
+
+
     }
 
     /**
@@ -139,5 +169,6 @@ public class LovePostDetailActivity extends AppCompatActivity {
         llCommentTrue=(LinearLayout)this.findViewById(R.id.ll_loveone_comment_true);
         llCommentFalse=(LinearLayout)this.findViewById(R.id.ll_loveone_comment_false);
         send=(TextView)this.findViewById(R.id.btn_loveone_send);
+        lv_allReply = (ListView)this.findViewById(R.id.lv_loveone_reply);
     }
 }

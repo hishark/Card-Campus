@@ -10,8 +10,8 @@
         app:cardBackgroundColor="#424242"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:contentPadding="8dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="6dp">
@@ -44,8 +44,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_below="@+id/lovereply_username"
-                    android:layout_toRightOf="@+id/lovereply_username"
-                    android:layout_alignBottom="@+id/lovereply_username"/>
+                    android:layout_toRightOf="@+id/lovereply_avatar"
+                    android:layout_alignLeft="@+id/lovereply_username" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
