@@ -55,8 +55,8 @@ import okhttp3.Response;
 public class LovePostDetailActivity extends AppCompatActivity {
 
     //真机地址192.168.137.1
-    private String URL="http://192.168.137.1:8080/Card-Campus-Server/getLoveReplyNum";
-    private String ADDURL="http://192.168.137.1:8080/Card-Campus-Server/addLoveReply";
+    private String URL="http://47.106.148.107:8080/Card-Campus-Server/getLoveReplyNum";
+    private String ADDURL="http://47.106.148.107:8080/Card-Campus-Server/addLoveReply";
     private Button loveone_back;
     private TextView title,content,name,time,replynum,send;
     private String send_content,loveID;
@@ -87,8 +87,11 @@ public class LovePostDetailActivity extends AppCompatActivity {
                     current_replys = temp.getReplys();
                 }
             }
-            Collections.reverse(current_replys);
 
+            int num;
+            Collections.reverse(current_replys);
+            num=current_replys.size();
+            replynum.setText(String.valueOf(num));
             LoveReplyAdapter loveReplyAdapter = new LoveReplyAdapter(getApplicationContext(),current_replys);
             lv_allReply.setAdapter(loveReplyAdapter);
 

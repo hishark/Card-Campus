@@ -48,8 +48,8 @@ import okhttp3.Response;
 public class LovewallFragment extends Fragment {
 
     //真机地址192.168.137.1 模拟器地址10.0.2.2
-    private String URL="http://192.168.137.1:8080/Card-Campus-Server/getLovePostList";
-    private String REPLYURL="http://192.168.137.1:8080/Card-Campus-Server/getLoveReplyNum";
+    private String URL="http://47.106.148.107:8080/Card-Campus-Server/getLovePostList";
+    private String REPLYURL="http://47.106.148.107:8080/Card-Campus-Server/getLoveReplyNum";
     //定义成员变量
     private View view;
     //标签云
