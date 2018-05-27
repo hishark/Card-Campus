@@ -15,7 +15,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import com.example.a777.card_campus.adapter.DaikeAdapter;
 import com.example.a777.card_campus.adapter.QuestionReplyAdapter;
 import com.example.a777.card_campus.bean.QuestionPost;
 import com.example.a777.card_campus.bean.User;
+import com.example.a777.card_campus.util.CurrentUserUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -54,12 +57,16 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
     CircleImageView user_avatar;
     ListView lv_reply;
 
-    FloatingActionButton addReply;
+    //FloatingActionButton addReply;
     HashMap<String, Object> current_questionpost;
     List<HashMap<String,Object>> QuestionPost;
     List<List<HashMap<String,Object>>> QuestionReplys;
     List<HashMap<String,Object>> currentPostReplys;
+    private static String addQuestionReplyURL="http://47.106.148.107:8080/Card-Campus-Server/addQuestionReply";
     private static String getQuestionReplysURL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionReplyList";
+    private LinearLayout llCommentTrue,llCommentFalse,click_comment;
+    private TextView tv_addReply;
+    private EditText edt_question_comment;
 
     //下拉刷新
     private SwipeRefreshLayout swipeRefreshLayout;//SwipeRefreshLayout下拉刷新控件
@@ -68,7 +75,15 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
     private int current_reply_num;//用来算id的
 
 
+    public Handler handler1 = new Handler() {
+        public void handleMessage(Message msg) {
+            if(msg.what==1){
+                getQuestionReplyList();
+            }
 
+            super.handleMessage(msg);
+        }
+    };
 
     //Handler用来从子线程往主线程传输数据
     public Handler handler = new Handler() {
@@ -77,7 +92,7 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
 
             current_reply_num = replyResult.size();
 
-            addReply.setOnClickListener(new View.OnClickListener() {
+            /*addReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //Toast.makeText(getApplicationContext(),current_reply_num+"",Toast.LENGTH_SHORT).show();
@@ -86,9 +101,58 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
                     intent.putExtra("reply_postId",Integer.parseInt(current_questionpost.get("bpost_id").toString()));
                     startActivity(intent);
                 }
+            });*/
+            tv_addReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("有毒吧","???");
+                    Toast.makeText(getApplicationContext(),"回复成功",Toast.LENGTH_LONG).show();
+                    addPostToServer(current_reply_num,Integer.parseInt(current_questionpost.get("bpost_id").toString()));
+                    hideComentView();
+                    edt_question_comment.setText("");
+                }
             });
 
+            final List<HashMap<String,Object>> newReplyResults = replyResult;
 
+            Log.d("收广播的！",newReplyResults.toString());
+
+            int currentPostId = Integer.valueOf(current_questionpost.get("bpost_id").toString());
+
+            final List<HashMap<String,Object>> thisPostReplys = new ArrayList<HashMap<String, Object>>();
+
+            for(int i=0;i<newReplyResults.size();i++){
+                QuestionPost questionPost = (QuestionPost)newReplyResults.get(i).get("questionPost");
+                if(questionPost.getBpost_id()==currentPostId){
+                    thisPostReplys.add(newReplyResults.get(i));
+                }
+            }
+
+            Log.d("绝望了",thisPostReplys.toString());
+
+            //下拉刷新
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    //TODO 刷新的时候获取数据
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if(replyResult.size()==thisPostReplys.size()){
+                                swipeRefreshLayout.setRefreshing(false);
+                            }else{
+                                Log.d("看一下结果",thisPostReplys.size()+"");
+                                QuestionReplyAdapter questionReplyAdapter = new QuestionReplyAdapter(getApplicationContext(),thisPostReplys);
+                                lv_reply.setAdapter(questionReplyAdapter);
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+
+
+                        }
+                    }, 2000);
+                }
+            });
 
 
             super.handleMessage(msg);
@@ -143,6 +207,59 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
 
         }
     };
+
+    private void addPostToServer(int currentReplyNum,int reply_postid) {
+        //实例化OkHttpClient
+        OkHttpClient client = new OkHttpClient();
+        //创建表单请求体
+        FormBody.Builder formBody = new FormBody.Builder();
+
+        /**
+         * 传递键值对参数
+         * key一定要和LoginActivityAction里面的变量同名！！！一定要同名！！！
+         */
+        formBody.add("breply_id",String.valueOf(currentReplyNum+1));
+        formBody.add("breply_content",edt_question_comment.getText().toString().trim());
+        formBody.add("breply_time",String.valueOf(System.currentTimeMillis()));
+        formBody.add("user_sno", CurrentUserUtil.getCurrentUser().getUser_sno());
+        formBody.add("bpost_id",String.valueOf(reply_postid));
+
+        //创建Request对象
+        Request request = new Request.Builder()
+                .url(addQuestionReplyURL)
+                .post(formBody.build())
+                .build();
+
+        /**
+         * Get的异步请求，不需要跟同步请求一样开启子线程
+         * 但是回调方法还是在子线程中执行的
+         * 所以要用到Handler传数据回主线程更新UI
+         */
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            //回调的方法执行在子线程
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.isSuccessful()){
+
+                    //通过handler传递数据到主线程
+                    Message msg = new Message();
+
+                    msg.what = 1;
+                    handler1.sendMessage(msg);
+
+
+                }else{
+
+                }
+            }
+        });
+    }
+
+
 
     protected void onDestroy() {
         unregisterReceiver(broadcastReceiver);
@@ -223,6 +340,23 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        llCommentFalse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCommentView();
+            }
+        });
+
+    }
+
+    private void showCommentView() {
+        llCommentTrue.setVisibility(View.VISIBLE);
+        llCommentFalse.setVisibility(View.GONE);
+    }
+    public void hideComentView() {
+        llCommentTrue.setVisibility(View.GONE);
+        llCommentFalse.setVisibility(View.VISIBLE);
     }
 
     private void initView() {
@@ -237,9 +371,14 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
 
         user_avatar = (CircleImageView)this.findViewById(R.id.questionpost_avatar);
 
-        addReply = (FloatingActionButton)this.findViewById(R.id.fab_addReply);
+        //addReply = (FloatingActionButton)this.findViewById(R.id.fab_addReply);
 
         swipeRefreshLayout = (SwipeRefreshLayout)this.findViewById(R.id.refresh_reply);
+
+        llCommentTrue=(LinearLayout)this.findViewById(R.id.ll_question_comment_true);
+        llCommentFalse=(LinearLayout)this.findViewById(R.id.ll_question_comment_false);
+        tv_addReply = (TextView)this.findViewById(R.id.tv_addReply);
+        edt_question_comment = (EditText)this.findViewById(R.id.edt_question_comment);
 
 
     }

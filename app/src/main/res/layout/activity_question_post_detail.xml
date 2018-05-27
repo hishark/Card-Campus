@@ -93,27 +93,97 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresh_reply"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ListView
             android:divider="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:id="@+id/lv_questionpost_reply">
 
         </ListView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_question_comment_true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:background="#cccc" />
+
+            <EditText
+                android:id="@+id/edt_question_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_bg_love"
+                android:hint="说点什么吧..."
+                android:maxLength="100"
+                android:maxLines="4"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_addReply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button_bg_love"
+                android:text="发送"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_question_comment_false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:background="#cccc" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/edittext_bg_love"
+                android:hint="匿名评论"
+                android:maxLines="4"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
+
+
+
+    <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_addReply"
         android:layout_width="60dp"
         app:backgroundTint="@color/colorAccent"
         android:layout_height="60dp"
         android:layout_gravity="bottom|center"
         android:src="@drawable/comment5"
-        android:layout_margin="@dimen/fab_margin" />
+        android:layout_margin="@dimen/fab_margin" />-->
 
 </FrameLayout>
