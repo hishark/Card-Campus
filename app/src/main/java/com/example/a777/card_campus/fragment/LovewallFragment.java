@@ -48,8 +48,8 @@ import okhttp3.Response;
 public class LovewallFragment extends Fragment {
 
     //真机地址192.168.137.1 模拟器地址10.0.2.2
-    private String URL="http://10.0.2.2:8080/Card-Campus-Server/getLovePostList";
-    private String REPLYURL="http://10.0.2.2:8080/Card-Campus-Server/getLoveReplyNum";
+    private String URL="http://192.168.137.1:8080/Card-Campus-Server/getLovePostList";
+    private String REPLYURL="http://192.168.137.1:8080/Card-Campus-Server/getLoveReplyNum";
     //定义成员变量
     private View view;
     //标签云
@@ -60,8 +60,6 @@ public class LovewallFragment extends Fragment {
     private List<HashMap<String, Object>> lovepostResult;
     List<HashMap<String, Object>> loveposts=null;
     HashMap<String, Object> lovepost=null;
-    private List<List<HashMap<String, Object>>> LoveReplyResults;
-    //private List<HashMap<String,Object>> lovereplyResult;
 
     //这个实体类存储了一个帖子的id、所有回复以及回复数量
     MyEntity lovereplyResult;
@@ -123,20 +121,11 @@ public class LovewallFragment extends Fragment {
             }
 
             lovewallAdapter = new LovewallAdapter(getActivity().getApplication(),lovepostResult,lovereplyResult.getReplys());
-            Log.d("结果集的大小",String.valueOf(lovereplyResult.getReplys().size()));
+            /*Log.d("结果集的大小",String.valueOf(lovereplyResult.getReplys().size()));
             Log.d("wwwa",lovereplyResult.getPostId());
             Log.d("wwwb",lovereplyResult.getReplys().toString());
-            Log.d("wwwc",String.valueOf(lovereplyResult.getReplyNum()));
+            Log.d("wwwc",String.valueOf(lovereplyResult.getReplyNum()));*/
 
-
-            /*ArrayList<List<HashMap<String, Object>>> matchs=new ArrayList<List<HashMap<String,Object>>>();
-            final HashMap<String, Object> match_item=new HashMap<String, Object>();
-            match_item.put("id",lovereplyResult.getPostId());
-            match_item.put("post",lovepostResult);
-            match_item.put("number",lovereplyResult.getReplyNum());
-            match_item.put("reply",lovereplyResult.getReplys());
-
-            Log.d("sssss",match_item.toString());*/
 
 
             tagCloudView.setAdapter(lovewallAdapter);
@@ -151,7 +140,7 @@ public class LovewallFragment extends Fragment {
                     String current_id=lovepostResult.get(i).get("love_id").toString();
                     String check_id=lovereplyResult.getPostId();
 
-                    Log.d("看一下选中表白的id",current_id);
+                    //Log.d("看一下选中表白的id",current_id);
 
                     intent.putExtra("lovepost", lovepostResult.get(i));
 
@@ -174,44 +163,9 @@ public class LovewallFragment extends Fragment {
                 }
             });
 
-
-
-            //Collections.reverse(lovereplyResult.getReplys());
-            //getReplyData(lovereplyResult.getPostId(),lovereplyResult.getReplys(),lovereplyResult.getReplyNum());
-            /*Log.d("wwwa",lovereplyResult.getPostId());
-            Log.d("wwwb",lovereplyResult.getReplys().toString());
-            Log.d("wwwc",String.valueOf(lovereplyResult.getReplyNum()));*/
             super.handleMessage(msg);
         }
     };
-
-    private void getReplyData(String postId,final List<HashMap<String, Object>> replys, final int replyNum) {
-
-        Log.d("wwwa",postId);
-        Log.d("wwwb",lovereplyResult.getReplys().toString());
-        Log.d("wwwc",String.valueOf(lovereplyResult.getReplyNum()));
-
-
-        lovewallAdapter = new LovewallAdapter(getActivity().getApplication(),lovepostResult,replys);
-
-        tagCloudView.setAdapter(lovewallAdapter);
-        tagCloudView.setOnTagClickListener(new TagCloudView.OnTagClickListener() {
-            @Override
-            public void onItemClick(ViewGroup parent, View view, int i) {
-                Intent intent = new Intent(getActivity().getApplication(),LovePostDetailActivity.class);
-                intent.putExtra("lovepost", replys.get(i));
-                //intent.putExtra("lovereply",lovereplyResult.getReplys().get(i));
-                intent.putExtra("num",replyNum);
-                Log.d("cnm",String.valueOf(i));
-                startActivity(intent);
-            }
-        });
-
-    }
-
-
-
-
 
 
     private Handler handler = new Handler() {
@@ -225,17 +179,11 @@ public class LovewallFragment extends Fragment {
             Log.d("size",lovepostResult.size()+"");
             for (int i=0;i<lovepostResult.size();i++){
                 loveTitle.add(lovepostResult.get(i).get("love_title").toString());
-                //Log.d("title",loveTitle.get(i));
-                //Log.d("reply",lovepostResult.get(i).get("love_id").toString());
-                //getLoveReplyNum(lovepostResult.get(i).get("love_id").toString(),handler1);
 
                 getLoveReplyNum(lovepostResult.get(i).get("love_id").toString());
                 //Log.d("ssssss",lovepostResult.get(i).get("love_id").toString());
             }
 
-            //lovewallAdapter = new LovewallAdapter(getActivity().getApplication(),loveTitle);
-            /*lovewallAdapter = new LovewallAdapter(getActivity().getApplication(),lovepostResult,lovereplyResult);
-            tagCloudView.setAdapter(lovewallAdapter);*/
 
 
             super.handleMessage(msg);
@@ -250,7 +198,7 @@ public class LovewallFragment extends Fragment {
 
         /**
          * 传递键值对参数
-         * key一定要和LoginActivityAction里面的变量同名！！！一定要同名！！！
+         * key值与服务器端controller中request.getParameter中的key一致
          */
         formBody.add("love_id",love_id);
 
@@ -329,7 +277,7 @@ public class LovewallFragment extends Fragment {
                             long time = JSON.parseObject(timeresult).getLong("time");
                             Timestamp trueTime = new Timestamp(time);
 
-                            //把时间put进questionReply
+                            //把时间put进loveReply
                             loveReply.put("lreply_time",trueTime);
 
                             loveReplys.add(loveReply);
@@ -385,11 +333,11 @@ public class LovewallFragment extends Fragment {
 
                     //从服务器取到Json键值对{“key”:“value”}
                     String temp = response.body().string();
-                    if(temp.equals("")||temp==null){
+                    /*if(temp.equals("")||temp==null){
                         Log.d("嗷嗷","null!");
                     }else{
                         Log.d("嗷嗷嗷",temp);
-                    }
+                    }*/
                     try{
                         JSONArray jsonArray=new JSONArray(temp);
                         loveposts=new ArrayList<HashMap<String, Object>>();

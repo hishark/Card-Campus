@@ -174,7 +174,7 @@ public class AddQuestionReplyActivity extends AppCompatActivity {
 
         /**
          * 传递键值对参数
-         * key一定要和LoginActivityAction里面的变量同名！！！一定要同名！！！
+         * key值与服务器端controller中request.getParameter中的key一致
          */
         /*formBody.add("username",userName);
         formBody.add("password",passWord);*/

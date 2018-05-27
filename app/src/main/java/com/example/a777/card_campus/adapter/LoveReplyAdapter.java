@@ -59,16 +59,16 @@ public class LoveReplyAdapter extends BaseAdapter {
         String username = user.getUser_nickname();
         Glide.with(context).load("http://p81fp7gd5.bkt.clouddn.com/useravatar.png").into(avatar);
         tv_username.setText("匿名用户");
-        tv_username.setTextColor(Color.parseColor("#E8E8E8"));
+        //tv_username.setTextColor(Color.parseColor("#E8E8E8"));
 
         String timestamp = replyList.get(i).get("lreply_time").toString();
         String post_time = timestamp.substring(0,timestamp.length()-2);
         tv_replytime.setText(post_time);
         Log.d("time",post_time);
-        tv_replytime.setTextColor(Color.parseColor("#E8E8E8"));
+        //tv_replytime.setTextColor(Color.parseColor("#E8E8E8"));
 
         tv_replycontent.setText(replyList.get(i).get("lreply_content").toString());
-        tv_replycontent.setTextColor(Color.parseColor("#E8E8E8"));
+        //tv_replycontent.setTextColor(Color.parseColor("#E8E8E8"));
 
         return ll;
     }
