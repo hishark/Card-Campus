@@ -57,7 +57,9 @@
         <activity android:name=".activity.SendDaibuypostActivity" />
         <activity android:name=".activity.DaideliverDetailActivity" />
         <activity android:name=".activity.SendDaideliverpostActivity" />
-        <activity android:name=".activity.EditDaiPostActivity"></activity>
+        <activity android:name=".activity.EditDaiPostActivity" />
+        <activity android:name=".activity.SendLoveActivity" />
+        <activity android:name=".activity.LovePostDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -170,11 +170,11 @@ public class DaikeActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     //从服务器取到Json键值对
                     String temp = response.body().string();
-                    if(temp.equals("")||temp==null){
+                    /*if(temp.equals("")||temp==null){
                         Log.d("看一哈","null!");
                     }else{
                         Log.d("看一哈",temp);
-                    }
+                    }*/
 
                     try {
                         JSONObject jsonObject=new JSONObject(temp);

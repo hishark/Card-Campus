@@ -443,7 +443,7 @@ public  class EverythingFragment extends Fragment {
                     //QuestionPostResult.size()+1-bpost_id
                     msg.what = bpost_id;
                     //QuestionReplyNum.add(questionReplys.size());
-                    Log.d("访问服务器的子线程里得到的数据：","Post的id："+bpost_id+"该Post的回复数"+questionReplys.size()+"");
+                    //Log.d("访问服务器的子线程里得到的数据：","Post的id："+bpost_id+"该Post的回复数"+questionReplys.size()+"");
                     handler1.sendMessage(msg);
 
                 }else{

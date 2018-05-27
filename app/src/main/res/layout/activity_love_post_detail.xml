@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/loveone_toolbar">
+            <android.support.v7.widget.Toolbar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:contentInsetStart="0dp">
+                 <Button
+                    android:id="@+id/lovepostdetail_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/back"/>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/loveone_toolbar">
+
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_loveone_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="#01a3a1"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="2dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_loveone_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="对象"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tv_loveone_content"
+                        android:layout_below="@+id/tv_loveone_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minHeight="120dp"
+                        android:text="该App使用 Android studio编写 + Material Design视觉设计语言，通过抓包的形式获取信息，喜欢的走一波！"
+                        android:textColor="#ffffff"/>
+                    <TextView
+                        android:id="@+id/tv_loveone_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_loveone_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignRight="@+id/tv_loveone_content"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:text="表白人"
+                        android:textColor="#ffffff"/>
+                    <TextView
+                        android:id="@+id/tv_loveone_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_loveone_name"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:text="2018-5-21"
+                        android:textColor="#ffffff" />
+                    <LinearLayout
+                        android:id="@+id/click_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_loveone_time"
+                        android:orientation="horizontal"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="6dp"
+                        android:paddingTop="8dp"
+                        android:background="#ffffff">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="130dp"
+                        android:src="@drawable/comment1"/>
+
+                    <TextView
+                        android:id="@+id/tv_loveone_replyNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="28"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+
+                        <!--<LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:gravity="right"
+                            android:orientation="horizontal">
+
+                            <com.sackcentury.shinebuttonlib.ShineButton
+                                android:id="@+id/sb_loveone_like"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="20dp"
+                                android:elevation="10dp"
+                                app:btn_color="@android:color/darker_gray"
+                                app:btn_fill_color="#f26d7d"
+                                app:siShape="@raw/heart" />
+
+                            <com.sackcentury.shinebuttonlib.ShineButton
+                                android:id="@+id/sb_loveone_comment"
+                                android:layout_width="21dp"
+                                android:layout_height="21dp"
+                                app:btn_color="@android:color/darker_gray"
+                                app:btn_fill_color="#996699"
+                                app:enable_flashing="true"
+                                app:shine_size="40dp"
+                                app:siShape="@drawable/ic_sms" />
+                        </LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/refresh_reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ListView
+                        android:divider="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/lv_loveone_reply">
+                    </ListView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_loveone_comment_true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="#cccc" />
+
+        <EditText
+            android:id="@+id/edt_loveone_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg_love"
+            android:hint="说点什么吧..."
+            android:maxLength="100"
+            android:maxLines="4"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btn_loveone_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_bg_love"
+            android:text="发送"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_loveone_comment_false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="#cccc" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/edittext_bg_love"
+            android:hint="匿名评论"
+            android:maxLines="4"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

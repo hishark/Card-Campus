@@ -8,18 +8,21 @@ import java.sql.Timestamp;
  */
 
 public class LovePost implements Serializable {
-    int love_id;
+    String love_id;
     String love_username;
     int is_anonymous;
     String love_content;
     String love_title;
     Timestamp love_time;
-    public int getLove_id() {
+
+    public String getLove_id() {
         return love_id;
     }
-    public void setLove_id(int love_id) {
+
+    public void setLove_id(String love_id) {
         this.love_id = love_id;
     }
+
     public String getLove_username() {
         return love_username;
     }

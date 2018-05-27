@@ -1,33 +1,50 @@
 package com.example.a777.card_campus.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a777.card_campus.activity.LovePostDetailActivity;
 import com.moxun.tagcloudlib.view.TagsAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
-/**
- * Created by 777 on 2018/4/7.
- */
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+import java.util.StringTokenizer;
 
 public class LovewallAdapter extends TagsAdapter {
 
     Context context;
-    ArrayList<String> lovetitle;
+    //ArrayList<String> lovetitle;
+    List<HashMap<String, Object>> lovepostResult,lovereplyResult;
+    ArrayList<Integer>  replyNum;
+    ArrayList<String> postId;
 
-    public LovewallAdapter(Context context, ArrayList<String> title){
+    private String color[] = {"#7dfaed", "#ffb8d5", "#ffda80", "#88adf9", "#ff00ff", "#e4007f", "#00CD66", "#A020F0", "#90EE90"};
+    //public LovewallAdapter(Context context, ArrayList<String> title){
+    public LovewallAdapter(Context context,List<HashMap<String, Object>> lovepostResult,List<HashMap<String,Object>> lovereplyResult){
         this.context = context;
-        this.lovetitle = title;
+
+        this.lovepostResult = lovepostResult;
+        this.lovereplyResult=lovereplyResult;
+        //this.replyNum=replyNum;
+        //this.postId=postId;
     }
 
     @Override
     public int getCount() {
-        return lovetitle.size();
+        //return lovetitle.size();
+        return lovepostResult.size();
     }
 
     /**
@@ -39,21 +56,25 @@ public class LovewallAdapter extends TagsAdapter {
         //设置控件的长宽
         //ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(100, 100);
         //tv.setLayoutParams(lp);
-        tv.setText(lovetitle.get(position));
-        tv.setGravity(Gravity.CENTER);
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,lovetitle.get(position),Toast.LENGTH_SHORT).show();
-            }
-        });
 
+        // 1.设置随机的字体大小(随机大小)
+        Random random = new Random();
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,
+                random.nextInt(8) + 18);// 14-29
+        tv.setTextColor(Color.parseColor(color[position % 8]));
+
+        //tv.setText(lovetitle.get(position));
+        final String lovetitle=lovepostResult.get(position).get("love_title").toString();
+        tv.setText(lovepostResult.get(position).get("love_title").toString());
+        tv.setGravity(Gravity.CENTER);
         return tv;
     }
 
+
+
     @Override
     public Object getItem(int position) {
-        return lovetitle.get(position);
+        return lovepostResult.get(position);
     }
 
     /**

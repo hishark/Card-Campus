@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 public class LoveReply implements Serializable {
     User user;
-    int lreply_id;
+    String lreply_id;
     LovePost lovepost;
     String lreply_content;
     Timestamp lreply_time;
@@ -20,12 +20,14 @@ public class LoveReply implements Serializable {
         this.user = user;
     }
 
-    public int getLreply_id() {
+    public String getLreply_id() {
         return lreply_id;
     }
-    public void setLreply_id(int lreply_id) {
+
+    public void setLreply_id(String lreply_id) {
         this.lreply_id = lreply_id;
     }
+
     public LovePost getLovepost() {
         return lovepost;
     }
