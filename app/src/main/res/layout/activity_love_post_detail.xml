@@ -152,7 +152,8 @@
             <android.support.v4.widget.SwipeRefreshLayout
                     android:id="@+id/refresh_reply"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="45dp">
 
                     <ListView
                         android:divider="@null"
