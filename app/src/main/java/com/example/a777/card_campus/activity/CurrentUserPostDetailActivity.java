@@ -261,7 +261,7 @@ public class CurrentUserPostDetailActivity extends AppCompatActivity {
                         getQuestionPostList(handler);
                         swipeRefreshLayout.setRefreshing(false);
                     }
-                }, 2000);
+                }, 500);
             }
         });
 

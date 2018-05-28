@@ -58,7 +58,7 @@ public  class EverythingFragment extends Fragment {
     private ListView lv_question;
     private LinearLayout question_top;
     private TextView CurrentUserquestionNumber;
-
+    QuestionPostAdapter questionPostAdapter;
     //下拉刷新
     private SwipeRefreshLayout mRefreshLayout;//SwipeRefreshLayout下拉刷新控件
 
@@ -84,7 +84,7 @@ public  class EverythingFragment extends Fragment {
          * 并且取得每一条记录的回复数量
          * 给ListView配置适配器
          */
-        getDataFromClient_setListView();
+        //getDataFromClient_setListView();
 
 
 
@@ -146,7 +146,7 @@ public  class EverythingFragment extends Fragment {
                     Collections.reverse(QuestionReplyResults);
 
                     //适配器一定要写在这里，不然会出现空指针问题
-                    final QuestionPostAdapter questionPostAdapter = new QuestionPostAdapter(getActivity().getApplicationContext(),QuestionPostResult,QuestionReplyNum);
+                    questionPostAdapter = new QuestionPostAdapter(getActivity().getApplicationContext(),QuestionPostResult,QuestionReplyNum);
                     lv_question.setAdapter(questionPostAdapter);
 
                     lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -201,7 +201,7 @@ public  class EverythingFragment extends Fragment {
                                         getDataFromClient_setListView();
                                         mRefreshLayout.setRefreshing(false);
                                     }
-                                }, 1000);
+                                }, 500);
                         }
                     });
                     questionPostAdapter.notifyDataSetChanged();
@@ -250,6 +250,14 @@ public  class EverythingFragment extends Fragment {
         getQuestionPostList(handler);
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        count=0;
+        getDataFromClient_setListView();
+
+    }
 
     /**
      * 初始化控件

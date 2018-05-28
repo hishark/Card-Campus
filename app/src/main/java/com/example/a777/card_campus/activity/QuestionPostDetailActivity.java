@@ -150,7 +150,7 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
 
 
                         }
-                    }, 2000);
+                    }, 500);
                 }
             });
 

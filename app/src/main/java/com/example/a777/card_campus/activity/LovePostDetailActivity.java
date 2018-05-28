@@ -197,7 +197,7 @@ public class LovePostDetailActivity extends AppCompatActivity {
                         getReplyList(loveID); //刷新
                         refresh_reply.setRefreshing(false);
                     }
-                }, 1000);
+                }, 500);
             }
         });
 
