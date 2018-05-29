@@ -3,7 +3,6 @@ package com.example.a777.card_campus.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import com.example.a777.card_campus.adapter.DaideliverAdapter;
 import com.example.a777.card_campus.adapter.DaikeAdapter;
 import com.example.a777.card_campus.bean.User;
 import com.google.gson.Gson;
+import com.melnykov.fab.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +58,7 @@ public class DaideliverActivity extends AppCompatActivity {
 
             //控件初始化
             initView();
+            sendDaideliverPost.attachToListView(lv_daidelivers);
             searchDaiPostCount();
             initswipe();
             //发帖一般最新的在最上面，用这句话就可以让帖子倒序显示
@@ -132,7 +133,7 @@ public class DaideliverActivity extends AppCompatActivity {
                         getDaideliverList(); //刷新
                         swipeRefreshLayout.setRefreshing(false);
                     }
-                }, 2000);
+                }, 500);
             }
         });
     }

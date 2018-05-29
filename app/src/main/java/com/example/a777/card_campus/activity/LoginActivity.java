@@ -32,6 +32,7 @@ import java.util.List;
 import okhttp3.*;
 
 import android.os.Handler;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     private OkHttpClient.Builder builder;// OkHttpClient内部类Builder对象
     private OkHttpClient okHttpClient;// OkHttpClient对象
     private Request request;
+    private ProgressBar login_progress;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -253,11 +255,12 @@ public class LoginActivity extends AppCompatActivity {
         et_userName = (EditText) findViewById(R.id.username);
         et_passWord = (EditText) findViewById(R.id.password);
         login=(Button)findViewById(R.id.bt_login);
-
+        login_progress = (ProgressBar)findViewById(R.id.login_progress);
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 LoginJXNU(loginUrl,getApplication());
+                login_progress.setVisibility(View.VISIBLE);
             }
         });
 

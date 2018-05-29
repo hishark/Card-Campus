@@ -65,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:background="@null"
+                    android:textSize="14dp"
                     android:layout_toRightOf="@+id/tv_dktitle"
                     android:layout_alignBottom="@+id/tv_dktitle"
                     android:layout_alignTop="@+id/tv_dktitle"/>
@@ -92,6 +93,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
                 <EditText
+                    android:textSize="14dp"
                     android:id="@+id/senddaike_content"
                     android:layout_below="@+id/tv_dkcontent"
                     android:layout_alignLeft="@+id/tv_dkcontent"

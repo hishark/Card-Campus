@@ -1,18 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.a777.card_campus.fragment.BookFragment">
+    <com.melnykov.fab.FloatingActionButton
 
-    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_bookAdd"
         android:layout_width="60dp"
-        app:backgroundTint="@color/colorPrimary"
         android:layout_height="60dp"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/add2"
-        android:layout_margin="@dimen/fab_margin" />
+        android:src="@android:drawable/ic_menu_send"
+        android:layout_margin="@dimen/fab_margin"
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorPrimaryDark"
+        fab:fab_colorRipple="@color/colorPrimaryDark"/>
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout

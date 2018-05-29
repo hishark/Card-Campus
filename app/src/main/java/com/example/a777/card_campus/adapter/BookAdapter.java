@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.example.a777.card_campus.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by 777 on 2018/4/6.
@@ -19,20 +21,20 @@ import java.util.ArrayList;
 public class BookAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<String> bookName;
-    public BookAdapter(Context context,ArrayList<String> bookName){
+    List<HashMap<String, Object>> bookList;
+    public BookAdapter(Context context,List<HashMap<String, Object>> BookPostResult){
         this.context = context;
-        this.bookName = bookName;
+        this.bookList = BookPostResult;
     }
 
     @Override
     public int getCount() {
-        return bookName.size();
+        return bookList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return bookName.get(i);
+        return bookList.get(i);
     }
 
     @Override
@@ -44,7 +46,9 @@ public class BookAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LinearLayout ll=(LinearLayout)View.inflate(context, R.layout.book_item, null);
         TextView tv=(TextView)ll.findViewById(R.id.textview_bookname);
-        tv.setText(String.valueOf(bookName.get(i)));
+
+        tv.setText(String.valueOf(bookList.get(i).get("book_title")));
+
         ll.setGravity(Gravity.CENTER_HORIZONTAL);
         return ll;
     }

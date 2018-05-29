@@ -14,6 +14,15 @@ public class BookPost implements Serializable {
     String book_describe;
     String book_title;
     Timestamp book_time;
+    int is_sold;
+
+    public int getIs_sold() {
+        return is_sold;
+    }
+
+    public void setIs_sold(int is_sold) {
+        this.is_sold = is_sold;
+    }
 
     public String getBook_title() {
         return book_title;

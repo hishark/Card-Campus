@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,6 +19,7 @@ import com.example.a777.card_campus.adapter.DaiactivityAdapter;
 import com.example.a777.card_campus.adapter.DaifoodAdapter;
 import com.example.a777.card_campus.bean.User;
 import com.google.gson.Gson;
+import com.melnykov.fab.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +61,7 @@ public class DaiactivityActivity extends AppCompatActivity {
 
             //控件初始化
             initView();
+            sendDaiactivityPost.attachToListView(lv_daiactivitys);
 
             searchDaiPostCount();
             initswipe();
@@ -85,6 +87,7 @@ public class DaiactivityActivity extends AppCompatActivity {
         public void handleMessage(Message msg){
             current_post_Num=msg.what;
             System.out.println("得到了。。。。。。。"+current_post_Num);
+
             sendDaiactivityPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -129,7 +132,7 @@ public class DaiactivityActivity extends AppCompatActivity {
                         getDaiactivityList(); //刷新
                         swipeRefreshLayout.setRefreshing(false);
                     }
-                }, 2000);
+                }, 500);
             }
         });
     }
@@ -195,7 +198,7 @@ public class DaiactivityActivity extends AppCompatActivity {
      */
     private void initView() {
         lv_daiactivitys = (ListView)this.findViewById(R.id.lv_daiactivitys);
-        sendDaiactivityPost = (FloatingActionButton)this.findViewById(R.id.daiactivity_send);
+        sendDaiactivityPost = (FloatingActionButton) this.findViewById(R.id.daiactivity_send);
         swipeRefreshLayout = (SwipeRefreshLayout)this.findViewById(R.id.refreshlayout_daiactivity);
     }
 

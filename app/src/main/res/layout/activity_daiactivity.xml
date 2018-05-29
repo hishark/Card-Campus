@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,14 +50,17 @@
                 android:id="@+id/lv_daiactivitys"/>
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
+    <com.melnykov.fab.FloatingActionButton
         android:id="@+id/daiactivity_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_margin="16dp"
         android:scaleType="center"
-        android:theme="@style/DaiFloatingButton"
-        app:srcCompat="@android:drawable/ic_menu_send"/>
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorPrimaryDark"
+        fab:fab_colorRipple="@color/colorPrimaryDark"
+        android:src="@android:drawable/ic_menu_send"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -22,8 +22,9 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_loveAdd"
         android:layout_width="60dp"
-        app:backgroundTint="@color/colorAccent"
         android:layout_height="60dp"
+        app:backgroundTint="@color/colorAccent"
+
         android:layout_gravity="bottom|end"
         android:src="@drawable/lovewalladd"
         android:layout_margin="@dimen/fab_margin" />

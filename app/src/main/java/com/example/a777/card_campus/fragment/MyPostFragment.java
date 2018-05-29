@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.activity.EditDaiPostActivity;
 import com.example.a777.card_campus.adapter.DaiPostAdapter;
+import com.example.a777.card_campus.adapter.FragmentAdapter;
 import com.example.a777.card_campus.bean.User;
 import com.example.a777.card_campus.util.CurrentUserUtil;
 import com.google.gson.Gson;
@@ -53,48 +56,17 @@ public class MyPostFragment extends Fragment {
     private CircleImageView avatar;
     private TextView username;
     private SwipeRefreshLayout swipeRefreshLayout;//SwipeRefreshLayout下拉刷新控件
+    private String TAG="MyPostFragment";
 
-    private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            daipostResult = (List)msg.obj;
-
-            //该list一定要在这里初始化，否则数据会重复出现
-            final List<HashMap<String, Object>> currentUserPost = new ArrayList<HashMap<String, Object>>();
-            for(int i=0;i<daipostResult.size();i++){
-                User user= (User)daipostResult.get(i).get("user");
-
-                if(user.getUser_nickname()== CurrentUserUtil.getCurrentUser().getUser_nickname()||user.getUser_nickname().equals(CurrentUserUtil.getCurrentUser().getUser_nickname())){
-                    currentUserPost.add(daipostResult.get(i));
-                }
-
-            }
-            initswipe();
-
-            //发帖一般最新的在最上面，用这句话就可以让帖子倒序显示
-            Collections.reverse(currentUserPost);
-
-            //适配器一定要写在这里，不然会出现空指针问题
-            DaiPostAdapter daipostadapter = new DaiPostAdapter(getActivity().getApplicationContext(),currentUserPost);
-            lv_daiposts.setAdapter(daipostadapter);
-
-            //ListView item 中的编辑按钮的点击事件
-            daipostadapter.setOnItemDeleteClickListener(new DaiPostAdapter.onItemEditListener() {
-                @Override
-                public void onEditClick(int i) {
-                    Intent intent = new Intent(getActivity().getApplication(),EditDaiPostActivity.class);
-                    intent.putExtra("title",currentUserPost.get(i).get("dpost_title").toString());
-                    intent.putExtra("content",currentUserPost.get(i).get("dpost_content").toString());
-                    intent.putExtra("id",currentUserPost.get(i).get("dpost_id").toString());
-                    intent.putExtra("state",currentUserPost.get(i).get("is_solved").toString());
-                    startActivity(intent);
-                }
-            });
-
-            super.handleMessage(msg);
-        }
-    };
-
-
+    /**
+     * TabLayout初尝试
+     */
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+    private FragmentAdapter adapter;
+    private List<Fragment> mFragments;
+    private List<String> mTitles;
+    private String[] titles = new String[]{"代代代","二手书"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,7 +80,26 @@ public class MyPostFragment extends Fragment {
         username.setText(CurrentUserUtil.getCurrentUser().getUser_nickname());
 
 
-        getMyPostListFromServer();
+
+
+        /**
+         * TabLayout标签页
+         */
+
+        mTitles = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            mTitles.add(titles[i]);
+        }
+        mFragments = new ArrayList<>();
+        mFragments.add(new MyDaiPostFragment());
+        mFragments.add(new MyBookFragment());
+        adapter = new FragmentAdapter(getActivity().getSupportFragmentManager(), mFragments, mTitles);
+        mViewPager.setAdapter(adapter);//给ViewPager设置适配器
+        mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来
+        mTabLayout.getTabAt(0).setIcon(R.drawable.instead2);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.ershoushu);
+
+
         return view;
     }
 
@@ -117,119 +108,13 @@ public class MyPostFragment extends Fragment {
         username=(TextView)view.findViewById(R.id.myPost_Username);
         lv_daiposts=(ListView)view.findViewById(R.id.lv_daipostList);
         swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.refresh_currentUserAllDaiPost);
-    }
-
-    private void initswipe() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //TODO 刷新的时候获取数据
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getMyPostListFromServer(); //刷新
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 2000);
-            }
-        });
-    }
-    private void getMyPostListFromServer() {
-        //实例化OkHttpClient
-        OkHttpClient client = new OkHttpClient();
-        //创建表单请求体
-        FormBody.Builder formBody = new FormBody.Builder();
-
         /**
-         * 传递键值对参数
-         * key一定要和LoginActivityAction里面的变量同名！！！一定要同名！！！
+         * TabLayout
          */
-        /*formBody.add("username",userName);
-        formBody.add("password",passWord);*/
-
-        //创建Request对象
-        Request request = new Request.Builder()
-                .url(PostListURL)
-                .build();
-        //.post(formBody.build())
-
-        /**
-         * Get的异步请求，不需要跟同步请求一样开启子线程
-         * 但是回调方法还是在子线程中执行的
-         * 所以要用到Handler传数据回主线程更新UI
-         */
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-            }
-
-            //回调的方法执行在子线程
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if(response.isSuccessful()){
-
-                    List<HashMap<String, Object>> daiposts=null;
-                    HashMap<String, Object> daipost=null;
-
-                    //从服务器取到Json键值对{“key”:“value”}
-                    String temp = response.body().string();
-                    //Log.d("看一下temp",temp);
-                    try{
-                        JSONArray jsonArray=new JSONArray(temp);
-                        daiposts=new ArrayList<HashMap<String, Object>>();
-
-                        for(int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject=(JSONObject)jsonArray.get(i);
-                            daipost=new HashMap<String, Object>();
-
-                            daipost.put("dpost_id", jsonObject.get("dpost_id"));
-                            daipost.put("dpost_content",jsonObject.get("dpost_content"));
-                            daipost.put("dpost_title", jsonObject.get("dpost_title"));
-                            daipost.put("dpost_time", jsonObject.get("dpost_time"));
-                            daipost.put("dpost_type", jsonObject.get("dpost_type"));
-                            daipost.put("is_solved", jsonObject.get("is_solved"));
-
-                            /**
-                             * 拿到了User的json数据
-                             * 利用Gson解析Json键值对
-                             */
-                            String userresult = jsonObject.get("user").toString();
-                            Gson gson = new Gson();
-                            User user = gson.fromJson(userresult, User.class);
-
-                            //Log.d("啊啊啊啊啊",userresult);
-
-                            daipost.put("user",user);
-                            //timeresult是从数据库插到的dpost_time字段，类型为timestamp
-                            //从数据库读出来长这个样子：存到timeresult里面
-                            //{"date":21,"day":6,"hours":23,"minutes":18,"month":3,"nanos":0,"seconds":0,"time":1524323880000,"timezoneOffset":-480,"year":118}
-                            String timeresult = jsonObject.get("dpost_time").toString();
-
-                            //利用fastJson——JSON取出timeresult里面的time字段，也就是13位的时间戳
-                            long time = JSON.parseObject(timeresult).getLong("time");
-                            Timestamp trueTime = new Timestamp(time);
-
-                            //把时间put进daike
-                            daipost.put("dpost_time",trueTime);
-                            daiposts.add(daipost);
-                        }
-
-
-                    }catch (JSONException a){
-
-                    }
-
-
-                    //通过handler传递数据到主线程
-                    Message msg = new Message();
-                    msg.obj = daiposts;
-                    handler.sendMessage(msg);
-
-                }else{
-
-                }
-            }
-        });
+        mTabLayout =(TabLayout)view.findViewById(R.id.mypost_tab_layout);
+        mViewPager = (ViewPager)view.findViewById(R.id.mypost_view_pager);
     }
+
+
 
 }

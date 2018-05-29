@@ -60,6 +60,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
                     <EditText
+                        android:textSize="14dp"
                         android:id="@+id/senddaifood_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -92,6 +93,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
                     <EditText
+                        android:textSize="14dp"
                         android:id="@+id/senddaifood_content"
                         android:layout_below="@+id/tv_dfcontent"
                         android:layout_alignLeft="@+id/tv_dfcontent"

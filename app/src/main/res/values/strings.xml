@@ -23,4 +23,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+
+    <!-- floatingActionButton的隐藏显示 -->
+    <string name="scale_down_show_behavior">com.example.a777.card_campus.util.ScaleDownShowBehavior</string>
 </resources>

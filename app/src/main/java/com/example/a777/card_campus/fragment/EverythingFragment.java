@@ -5,7 +5,7 @@ import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -31,6 +31,7 @@ import com.example.a777.card_campus.bean.QuestionPost;
 import com.example.a777.card_campus.bean.User;
 import com.example.a777.card_campus.util.CurrentUserUtil;
 import com.google.gson.Gson;
+import com.melnykov.fab.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -187,6 +188,7 @@ public  class EverythingFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
+                    fab.attachToListView(lv_question);
 
                     //下拉刷新
                     mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
