@@ -53,4 +53,6 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.46'
     //compile 'com.sackcentury:shinebutton:0.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
+    compile 'com.qiniu:happy-dns:0.2.13'
 }

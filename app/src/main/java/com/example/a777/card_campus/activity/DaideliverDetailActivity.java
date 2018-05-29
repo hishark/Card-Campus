@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.bean.User;
+import com.example.a777.card_campus.util.CheckQQUtil;
+import com.example.a777.card_campus.util.CurrentUserUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +73,15 @@ public class DaideliverDetailActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String url="mqqwpa://im/chat?chat_type=wpa&uin="+qq;
                         System.out.print("QQ打开了没"+url);
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                        if(CheckQQUtil.qqCheck(qq)) {
+                            if(qq.equals(CurrentUserUtil.getCurrentUser().getUser_qq())){
+                                Toast.makeText(getApplicationContext(),"自己不能跟自己聊天哦~",Toast.LENGTH_SHORT).show();
+                            }else {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(),"该用户留下了错误的QQ号，请选择其他联系方式",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }else{

@@ -118,37 +118,6 @@
             </android.support.v7.widget.CardView>
 
 
-
-                        <!--<LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="15dp"
-                            android:gravity="right"
-                            android:orientation="horizontal">
-
-                            <com.sackcentury.shinebuttonlib.ShineButton
-                                android:id="@+id/sb_loveone_like"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginRight="20dp"
-                                android:elevation="10dp"
-                                app:btn_color="@android:color/darker_gray"
-                                app:btn_fill_color="#f26d7d"
-                                app:siShape="@raw/heart" />
-
-                            <com.sackcentury.shinebuttonlib.ShineButton
-                                android:id="@+id/sb_loveone_comment"
-                                android:layout_width="21dp"
-                                android:layout_height="21dp"
-                                app:btn_color="@android:color/darker_gray"
-                                app:btn_fill_color="#996699"
-                                app:enable_flashing="true"
-                                app:shine_size="40dp"
-                                app:siShape="@drawable/ic_sms" />
-                        </LinearLayout>-->
-
-                    <!--</LinearLayout>-->
-
             <android.support.v4.widget.SwipeRefreshLayout
                     android:id="@+id/refresh_reply"
                     android:layout_width="match_parent"

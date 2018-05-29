@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.bean.DaiPost;
 import com.example.a777.card_campus.bean.User;
+import com.example.a777.card_campus.util.CheckQQUtil;
+import com.example.a777.card_campus.util.CurrentUserUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,14 +68,25 @@ public class DaikeDetailActivity extends AppCompatActivity {
         daikedetail_content.setText(daike_item.get("dpost_content").toString());
 
         final String qq=user.getUser_qq().toString();
-        if(qq!=null||qq.equals("")){
+
+
+        if(qq!=null||!(qq.equals(""))){
             if(isQQClientAvailable(this)){
                 dkdetal_qq.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String url="mqqwpa://im/chat?chat_type=wpa&uin="+qq;
                         System.out.print("QQ打开了没"+url);
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        if(CheckQQUtil.qqCheck(qq)) {
+                            if(qq.equals(CurrentUserUtil.getCurrentUser().getUser_qq())){
+                                Toast.makeText(getApplicationContext(),"自己不能跟自己聊天哦~",Toast.LENGTH_LONG).show();
+                            }else {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(),"该用户留下了错误的QQ号，请选择其他联系方式",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }else{
@@ -99,6 +113,8 @@ public class DaikeDetailActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "亲，ta没留下手机号哦", Toast.LENGTH_LONG).show();
         }
     }
+
+
     /**
      * 判断qq是否可用
      */
