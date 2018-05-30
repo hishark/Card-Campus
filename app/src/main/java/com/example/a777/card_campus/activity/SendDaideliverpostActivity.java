@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.bean.User;
 import com.example.a777.card_campus.util.CurrentUserUtil;
+import com.example.a777.card_campus.util.RandomIDUtil;
 
 import java.io.IOException;
 
@@ -31,7 +32,6 @@ public class SendDaideliverpostActivity extends AppCompatActivity {
     private TextView tv_type;
     private Button daideliver_back,daideliver_send;
     private String deliverpost_content,deliverpost_title,deliverpost_qq,deliverpost_tel,type;
-    private int current_post_Num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +44,6 @@ public class SendDaideliverpostActivity extends AppCompatActivity {
         final User user = CurrentUserUtil.getCurrentUser();
 
 
-        //得到当前帖子数量，然后给即将添加的帖子设置id
-        current_post_Num = getIntent().getIntExtra("daiPostNum",0);
-        Log.d("current_post_num", String.valueOf(current_post_Num));
 
         daideliver_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +121,7 @@ public class SendDaideliverpostActivity extends AppCompatActivity {
          */
 
         RequestBody formBody = new FormBody.Builder()
-                .add("dpost_id",String.valueOf(current_post_Num+1))
+                .add("dpost_id", RandomIDUtil.getID())
                 .add("user_sno",CurrentUserUtil.getCurrentUser().getUser_sno())
                 .add("dpost_title",deliverpost_title)
                 .add("dpost_content",deliverpost_content)
