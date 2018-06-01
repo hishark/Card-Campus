@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.bean.User;
 import com.example.a777.card_campus.util.CurrentUserUtil;
+import com.example.a777.card_campus.util.RandomIDUtil;
 
 import java.io.IOException;
 
@@ -43,9 +44,6 @@ public class SendDaiactivitypostActivity extends AppCompatActivity {
         initView();
 
         final User user = CurrentUserUtil.getCurrentUser();
-        //得到当前帖子数量，然后给即将添加的帖子设置id
-        current_post_Num = getIntent().getIntExtra("daiPostNum",0);
-        Log.d("current_post_num", String.valueOf(current_post_Num));
 
         daiactivity_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +121,7 @@ public class SendDaiactivitypostActivity extends AppCompatActivity {
          */
 
         RequestBody formBody = new FormBody.Builder()
-                .add("dpost_id",String.valueOf(current_post_Num+1))
+                .add("dpost_id", RandomIDUtil.getID())
                 .add("user_sno",CurrentUserUtil.getCurrentUser().getUser_sno())
                 .add("dpost_title",dapost_title)
                 .add("dpost_content",dapost_content)
