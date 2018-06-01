@@ -74,7 +74,7 @@ public class EditQuestionPostActivity extends AppCompatActivity {
                 updatePost(changed_title,changed_content);
                 Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(EditQuestionPostActivity.this,CurrentUserPostDetailActivity.class);
+                Intent intent = new Intent(EditQuestionPostActivity.this,CurrentUserBSTPostDetailActivity.class);
 
 
                 finish();

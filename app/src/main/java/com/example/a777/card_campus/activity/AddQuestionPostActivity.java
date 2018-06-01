@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.bean.User;
 import com.example.a777.card_campus.util.CurrentUserUtil;
+import com.example.a777.card_campus.util.RandomIDUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -39,7 +40,7 @@ public class AddQuestionPostActivity extends AppCompatActivity {
 
     String post_content;
     String post_title;
-    int current_post_Num;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,7 @@ public class AddQuestionPostActivity extends AppCompatActivity {
         //控件初始化
         initView();
 
-        //得到当前帖子数量，然后给即将添加的帖子设置id
-        current_post_Num = getIntent().getIntExtra("PostNum",0);
+
 
         bt_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +88,7 @@ public class AddQuestionPostActivity extends AppCompatActivity {
          * 传递键值对参数
          * key一定要和LoginActivityAction里面的变量同名！！！一定要同名！！！
          */
-        formBody.add("bpost_id",String.valueOf(current_post_Num+1));
+        formBody.add("bpost_id", RandomIDUtil.getID());
         formBody.add("bpost_title",post_title);
         formBody.add("bpost_content",post_content);
         formBody.add("bpost_time",String.valueOf(System.currentTimeMillis()));

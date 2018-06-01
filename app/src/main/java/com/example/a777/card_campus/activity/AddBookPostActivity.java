@@ -69,9 +69,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class AddBookPostActivity extends AppCompatActivity{
     private static String AccessKey = "HBckSDRko17AS-s_Ufbb29bYfFMKMV7opdRnx-2C";//此处填你自己的AccessKey
     private static String SecretKey = "grNgIr009LWhQyfGvOGua8CPWFmlqfhySioKTrdk";//此处填你自己的SecretKey
-    private static String linkWayURL="http://10.0.2.2:8080/Card-Campus-Server/insertLinkWay";
+    private static String linkWayURL="http://47.106.148.107:8080/Card-Campus-Server/insertLinkWay";
     private static final String TAG = "MainActivity";
-    private static String addBookPostURL="http://10.0.2.2:8080/Card-Campus-Server/addBookPost";
+    private static String addBookPostURL="http://47.106.148.107:8080/Card-Campus-Server/addBookPost";
     private ImageButton imgbt_addBookImg_gallery;
     private ImageButton imgbt_addBookImg_camera;
     private ImageButton imgbt_BookImg;

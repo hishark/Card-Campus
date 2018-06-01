@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.a777.card_campus.activity.BSTPostDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:contentInsetStart="0dp">
+                <Button
+                    android:id="@+id/questionpost_detail_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/back"/>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:contentPadding="8dp"
+            app:cardElevation="6dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/questionpost_avatar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/avatar1"/>
+
+                    <TextView
+                        android:id="@+id/questionpost_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_toRightOf="@+id/questionpost_avatar"
+                        android:layout_alignTop="@+id/questionpost_avatar"/>
+
+                    <TextView
+                        android:id="@+id/questionpost_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_below="@+id/questionpost_username"
+                        android:layout_toRightOf="@+id/questionpost_avatar"
+                        android:layout_alignBottom="@+id/questionpost_avatar"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp">
+                    <TextView
+                        android:id="@+id/questionpostdetail_title"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:padding="10dp"/>
+                    <TextView
+                        android:id="@+id/questionpostdetail_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/questionpost_title"
+                        android:layout_alignLeft="@+id/questionpost_title"
+                        android:padding="10dp"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_reply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ListView
+                android:divider="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/lv_questionpost_reply">
+
+            </ListView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_question_comment_true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:background="#cccc" />
+
+            <EditText
+                android:id="@+id/edt_question_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_bg_love"
+                android:hint="说点什么吧..."
+                android:maxLength="100"
+                android:maxLines="4"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_addReply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button_bg_love"
+                android:text="发送"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_question_comment_false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:background="#cccc" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/edittext_bg_love"
+                android:hint="匿名评论"
+                android:maxLines="4"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_addReply"
+        android:layout_width="60dp"
+        app:backgroundTint="@color/colorAccent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center"
+        android:src="@drawable/comment5"
+        android:layout_margin="@dimen/fab_margin" />-->
+
+</FrameLayout>

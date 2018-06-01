@@ -8,15 +8,15 @@ import java.sql.Timestamp;
  */
 
 public class QuestionPost implements Serializable {
-    int bpost_id;
+    String bpost_id;
     User user;
     Timestamp bpost_time;
     String bpost_content;
     String bpost_title;
-    public int getBpost_id() {
+    public String getBpost_id() {
         return bpost_id;
     }
-    public void setBpost_id(int bpost_id) {
+    public void setBpost_id(String bpost_id) {
         this.bpost_id = bpost_id;
     }
     public User getUser() {

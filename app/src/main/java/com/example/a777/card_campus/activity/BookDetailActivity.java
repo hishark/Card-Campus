@@ -35,6 +35,7 @@ public class BookDetailActivity extends AppCompatActivity {
     private Button back,userqq,usertel;
     private TextView bookpost_content,bookpost_username,bookpost_time;
     private CircleImageView bookpost_useravatar;
+    private ImageView soldORsale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,14 @@ public class BookDetailActivity extends AppCompatActivity {
         String timestamp = currentBookPost.get("book_time").toString();
         String post_time = timestamp.substring(0,timestamp.length()-2);
         bookpost_time.setText(post_time);
+        Log.d("卖掉没",currentBookPost.get("is_sold").toString());
+        if(currentBookPost.get("is_sold").toString().equals("1")){
+            soldORsale.setImageResource(R.drawable.sold3);
+        }else{
+            soldORsale.setImageResource(R.drawable.sale3);
+
+        }
+
 
 
         final String qq=user.getUser_qq().toString();
@@ -135,6 +144,7 @@ public class BookDetailActivity extends AppCompatActivity {
         bookpost_username = (TextView)this.findViewById(R.id.bookpost_username);
         userqq = (Button)this.findViewById(R.id.bookpost_userqq);
         usertel = (Button)this.findViewById(R.id.bookpost_usertel);
+        soldORsale = (ImageView)findViewById(R.id.soldorsale);
 
     }
 }

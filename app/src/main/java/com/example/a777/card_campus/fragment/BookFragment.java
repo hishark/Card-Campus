@@ -46,7 +46,7 @@ public class BookFragment extends Fragment {
 
 
     //买了个服务器 ip为47.106.148.107 模拟器是10.0.2.2
-    private static String URL="http://10.0.2.2:8080/Card-Campus-Server/getBookList";
+    private static String URL="http://47.106.148.107:8080/Card-Campus-Server/getBookList";
 
     private List<HashMap<String, Object>> BookPostResult;
 
@@ -156,6 +156,7 @@ public class BookFragment extends Fragment {
                             bookPost.put("book_img", jsonObject.get("book_img"));
                             bookPost.put("book_describe", jsonObject.get("book_describe"));
                             bookPost.put("book_title", jsonObject.get("book_title"));
+                            bookPost.put("is_sold", jsonObject.get("is_sold"));
 
                             /**
                              * 拿到了User的json数据

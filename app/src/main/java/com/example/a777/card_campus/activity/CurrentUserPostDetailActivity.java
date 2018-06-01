@@ -185,8 +185,8 @@ public class CurrentUserPostDetailActivity extends AppCompatActivity {
         TopQuestionNum.setText(" "+(currentUserReplyNum.length-1)+" ");
 
         //设置适配器
-        final QuestionPostEditDeleteAdapter questionPostEditDeleteAdapter = new QuestionPostEditDeleteAdapter(getApplicationContext(),currentUserPost,currentUserReplyNum);
-        allQuestion.setAdapter(questionPostEditDeleteAdapter);
+        //final QuestionPostEditDeleteAdapter questionPostEditDeleteAdapter = new QuestionPostEditDeleteAdapter(getApplicationContext(),currentUserPost,currentUserReplyNum);
+        //allQuestion.setAdapter(questionPostEditDeleteAdapter);
 
 
         /**
@@ -202,7 +202,7 @@ public class CurrentUserPostDetailActivity extends AppCompatActivity {
             }
         });*/
 
-        questionPostEditDeleteAdapter.setOnItemEditClickListener(new QuestionPostEditDeleteAdapter.onItemEditListener() {
+        /*questionPostEditDeleteAdapter.setOnItemEditClickListener(new QuestionPostEditDeleteAdapter.onItemEditListener() {
             @Override
             public void onEditClick(int i) {
                 Intent intent = new Intent(CurrentUserPostDetailActivity.this,EditQuestionPostActivity.class);
@@ -214,7 +214,7 @@ public class CurrentUserPostDetailActivity extends AppCompatActivity {
                 //Log.d("疯狂测试中clickcontent",currentUserPost.get(i).get("bpost_content").toString());
                 startActivity(intent);
             }
-        });
+        });*/
 
         /*List<HashMap<String, Object>> a = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> test = new HashMap<String, Object>();
@@ -294,10 +294,10 @@ public class CurrentUserPostDetailActivity extends AppCompatActivity {
         TopQuestionNum.setText(" "+(currentUserReplyNum.length-1)+" ");
 
         //设置适配器
-        final QuestionPostEditDeleteAdapter questionPostEditDeleteAdapter = new QuestionPostEditDeleteAdapter(getApplicationContext(),currentUserPost,currentUserReplyNum);
-        allQuestion.setAdapter(questionPostEditDeleteAdapter);
+        //final QuestionPostEditDeleteAdapter questionPostEditDeleteAdapter = new QuestionPostEditDeleteAdapter(getApplicationContext(),currentUserPost,currentUserReplyNum);
+        //allQuestion.setAdapter(questionPostEditDeleteAdapter);
 
-        questionPostEditDeleteAdapter.setOnItemEditClickListener(new QuestionPostEditDeleteAdapter.onItemEditListener() {
+        /*questionPostEditDeleteAdapter.setOnItemEditClickListener(new QuestionPostEditDeleteAdapter.onItemEditListener() {
             @Override
             public void onEditClick(int i) {
                 Intent intent = new Intent(CurrentUserPostDetailActivity.this,EditQuestionPostActivity.class);
@@ -309,7 +309,7 @@ public class CurrentUserPostDetailActivity extends AppCompatActivity {
                 //Log.d("疯狂测试中clickcontent",currentUserPost.get(i).get("bpost_content").toString());
                 startActivity(intent);
             }
-        });
+        });*/
 
         for(int k : currentUserPostId){
             currentPostReplys.add(QuestionReplyResults.get(QuestionReplyResults.size()-k-1));

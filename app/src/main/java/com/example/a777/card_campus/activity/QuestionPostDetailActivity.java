@@ -123,7 +123,7 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
 
             for(int i=0;i<newReplyResults.size();i++){
                 QuestionPost questionPost = (QuestionPost)newReplyResults.get(i).get("questionPost");
-                if(questionPost.getBpost_id()==currentPostId){
+                if(questionPost.getBpost_id().equals(currentPostId)){
                     thisPostReplys.add(newReplyResults.get(i));
                 }
             }
@@ -174,7 +174,7 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
 
             for(int i=0;i<newReplyResults.size();i++){
                 QuestionPost questionPost = (QuestionPost)newReplyResults.get(i).get("questionPost");
-                if(questionPost.getBpost_id()==currentPostId){
+                if(questionPost.getBpost_id().equals(currentPostId)){
                     thisPostReplys.add(newReplyResults.get(i));
                 }
             }
@@ -458,8 +458,7 @@ public class QuestionPostDetailActivity extends AppCompatActivity {
                             long posttime1 = JSON.parseObject(posttime).getLong("time");
                             Timestamp truePostTime = new Timestamp(posttime1);
 
-                            String postid = jsonObject1.get("bpost_id").toString();
-                            int bpost_id = Integer.parseInt(postid);
+                            String bpost_id = jsonObject1.get("bpost_id").toString();
 
                             String postcontent = jsonObject1.get("bpost_content").toString();
                             String posttitle = jsonObject1.get("bpost_title").toString();

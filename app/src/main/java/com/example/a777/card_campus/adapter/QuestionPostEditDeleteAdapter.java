@@ -28,12 +28,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class QuestionPostEditDeleteAdapter extends BaseAdapter {
     Context context;
     List<HashMap<String, Object>> list;
-    int ReplyNum[];
+    HashMap<String, Object> BSTPostReplyNum;
 
-    public QuestionPostEditDeleteAdapter(Context applicationContext, List<HashMap<String, Object>> questionPostResult, int[] questionReplyNum) {
+    public QuestionPostEditDeleteAdapter(Context applicationContext, List<HashMap<String, Object>> questionPostResult, HashMap<String, Object> questionReplyNum) {
         this.context = applicationContext;
         this.list = questionPostResult;
-        this.ReplyNum = questionReplyNum;
+        this.BSTPostReplyNum = questionReplyNum;
     }
 
     @Override
@@ -67,26 +67,40 @@ public class QuestionPostEditDeleteAdapter extends BaseAdapter {
             }
         });
 
+        String timestamp = list.get(i).get("bpost_time").toString();
+        String post_time = timestamp.substring(0,timestamp.length()-2);
+        TextView time = (TextView)ll.findViewById(R.id.questionpost_posttime);
+        time.setText(post_time);
 
 
         TextView tv_questionReplyNum = (TextView)ll.findViewById(R.id.questionpost_replyNum);
-        tv_questionReplyNum.setText(ReplyNum[i+1]+"");
+
+        String post_id = list.get(i).get("bpost_id").toString();
+        int replyNum = (int)BSTPostReplyNum.get(post_id);
+
+        tv_questionReplyNum.setText(replyNum+"");
         tv_questionReplyNum.setTextColor(Color.parseColor("#757575"));
 
-        User user = (User)list.get(i).get("user");
-        String username = user.getUser_nickname();
+        //User user = (User)list.get(i).get("user");
+        //String username = user.getUser_nickname();
 
-        TextView tv_username = (TextView)ll.findViewById(R.id.questionpost_username);
-        tv_username.setText(username);
-        tv_username.setTextColor(Color.parseColor("#757575"));
+        //TextView tv_username = (TextView)ll.findViewById(R.id.questionpost_username);
+        //tv_username.setText(username);
+        //tv_username.setTextColor(Color.parseColor("#757575"));
 
         TextView tv_questionpost_title = (TextView)ll.findViewById(R.id.questionpost_title);
         String question_post_title = list.get(i).get("bpost_title").toString();
         tv_questionpost_title.setText(question_post_title);
         tv_questionpost_title.setTextColor(Color.parseColor("#757575"));
 
-        CircleImageView avatar = (CircleImageView)ll.findViewById(R.id.questionpost_avatar);
-        Glide.with(context).load(user.getUser_avatar()).into(avatar);
+
+        TextView tv_questionpost_content = (TextView)ll.findViewById(R.id.currentt_questionpost_content);
+        String question_post_content = list.get(i).get("bpost_content").toString();
+        tv_questionpost_content.setText(question_post_content);
+        tv_questionpost_content.setTextColor(Color.parseColor("#a49b9b"));
+
+        //CircleImageView avatar = (CircleImageView)ll.findViewById(R.id.questionpost_avatar);
+        //Glide.with(context).load(user.getUser_avatar()).into(avatar);
 
         return ll;
     }

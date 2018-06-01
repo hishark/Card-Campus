@@ -1,34 +1,28 @@
-package com.example.a777.card_campus.fragment;
+package com.example.a777.card_campus.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
 import com.example.a777.card_campus.R;
-import com.example.a777.card_campus.activity.AddQuestionPostActivity;
-import com.example.a777.card_campus.activity.BSTPostDetailActivity;
-import com.example.a777.card_campus.activity.CurrentUserBSTPostDetail2Activity;
-import com.example.a777.card_campus.activity.CurrentUserBSTPostDetailActivity;
-import com.example.a777.card_campus.activity.CurrentUserPostDetailActivity;
-import com.example.a777.card_campus.activity.QuestionPostDetailActivity;
 import com.example.a777.card_campus.adapter.QuestionPostAdapter;
+import com.example.a777.card_campus.adapter.QuestionPostEditDeleteAdapter;
 import com.example.a777.card_campus.bean.User;
 import com.example.a777.card_campus.util.CurrentUserUtil;
 import com.example.a777.card_campus.util.JsonUtil;
 import com.example.a777.card_campus.util.ToastUtil;
 import com.google.gson.Gson;
-import com.melnykov.fab.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,41 +34,39 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class BaiShiTongFragment extends Fragment {
+public class CurrentUserBSTPostDetail2Activity extends AppCompatActivity {
+    private static String getBSTPostReplyURL="http://47.106.148.107:8080/Card-Campus-Server/getBSTPostReplyNum";
+    private static String getUserPostNumURL="http://47.106.148.107:8080/Card-Campus-Server/userBSTPostNum";
+    private static String getBSTPostURL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionPostList";
     private static final int GET_BSTPOST_SUCCESS = 1;
     private static final int GET_BSTPOST_REPLY_NUM_SUCCESS = 2;
     private static final int GET_USER_POST_NUM_SUCCESS = 3;
-    private static final int GET_BSTPOST_REPLY_NUM_SUCCESS_REFRESH = 4;
-
-    private static String getBSTPostURL="http://47.106.148.107:8080/Card-Campus-Server/getQuestionPostList";
-    private static String getBSTPostReplyURL="http://47.106.148.107:8080/Card-Campus-Server/getBSTPostReplyNum";
-    private static String getUserPostNumURL="http://47.106.148.107:8080/Card-Campus-Server/userBSTPostNum";
-
-    private View view;
-    private FloatingActionButton bt_sendBSTPost;
-    private HashMap<String, Object> BSTPostReplyNum;
-    private List<HashMap<String, Object>> BSTPosts;
-    private List<HashMap<String, Object>> CurrentUserBSTPosts;
     private boolean isGetPost = false;
     private boolean isGetReplyNum = false;
     private boolean isGetNum = false;
-    private boolean isRefresh = false;
-    private QuestionPostAdapter questionPostAdapter;
-    private ListView lv_BSTPosts;
-    private LinearLayout question_top;
-    private int current_post_Num;
-    private TextView CurrentUserquestionNumber;
 
+    //控件们
+    private CircleImageView avatar;
+    private TextView username;
+    private ListView lv_userAllQuestion;
+    private TextView TopQuestionNum;
+    private Button back;
+    //下拉刷新
+    private SwipeRefreshLayout swipeRefreshLayout;//SwipeRefreshLayout下拉刷新控件
+    private int current_post_Num;
+    private List<HashMap<String,Object>> Current_BSTPosts;
+    private List<HashMap<String,Object>> BSTPosts;
+    private HashMap<String, Object> BSTPostReplyNum;
+    QuestionPostEditDeleteAdapter questionPostEditDeleteAdapter;
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -93,116 +85,97 @@ public class BaiShiTongFragment extends Fragment {
                 case GET_USER_POST_NUM_SUCCESS:
                     current_post_Num = (Integer)msg.obj;
                     isGetNum = true;
-                    CurrentUserquestionNumber.setText(current_post_Num+"");
-                    break;
-                case GET_BSTPOST_REPLY_NUM_SUCCESS_REFRESH:
-                    isRefresh = true;
-                    BSTPostReplyNum.clear();
-                    BSTPostReplyNum.putAll((HashMap<String, Object>)msg.obj);
-                    questionPostAdapter.notifyDataSetChanged();
-                    break;
-
+                    TopQuestionNum.setText(current_post_Num+"");
             }
 
-            if(isGetReplyNum&&isGetPost&&isGetNum&&!isRefresh){
+            if(isGetReplyNum&&isGetPost&&isGetNum){
                 //ToastUtil.createToast(getContext(),"yes!");
-                questionPostAdapter = new QuestionPostAdapter(getContext(),BSTPosts,BSTPostReplyNum);
-                lv_BSTPosts.setAdapter(questionPostAdapter);
+
 
                 Log.d("sssssize",BSTPosts.size()+"");
-                CurrentUserBSTPosts = new ArrayList<>();
+                Current_BSTPosts = new ArrayList<>();
                 for(int i=0;i<BSTPosts.size();i++){
                     User user = (User)(BSTPosts.get(i).get("user"));
                     String sno = user.getUser_sno();
                     if(sno==CurrentUserUtil.getCurrentUser().getUser_sno()||sno.equals(CurrentUserUtil.getCurrentUser().getUser_sno())){
-                        CurrentUserBSTPosts.add(BSTPosts.get(i));
+                        Current_BSTPosts.add(BSTPosts.get(i));
                     }
                 }
-
-
-                question_top.setOnClickListener(new View.OnClickListener() {
+                Log.d("Currentsssssize",Current_BSTPosts.size()+"");
+                questionPostEditDeleteAdapter = new QuestionPostEditDeleteAdapter(getApplicationContext(),Current_BSTPosts,BSTPostReplyNum);
+                lv_userAllQuestion.setAdapter(questionPostEditDeleteAdapter);
+                questionPostEditDeleteAdapter.setOnItemEditClickListener(new QuestionPostEditDeleteAdapter.onItemEditListener() {
                     @Override
-                    public void onClick(View view) {
-                        //Toast.makeText(getActivity().getApplicationContext(),"点这进个人界面",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity().getApplicationContext(),CurrentUserBSTPostDetail2Activity.class);
-                        /*intent.putExtra("QuestionPostNum",current_post_Num);
-                        intent.putExtra("QuestionPost",(Serializable)CurrentUserBSTPosts);
-                        intent.putExtra("QuestionPostReplyNum",(Serializable)BSTPostReplyNum);*/
-                        //不需要传数据过去，直接去那边查就好了
-                        startActivity(intent);
-                    }
-                });
-
-                lv_BSTPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(getActivity().getApplicationContext(),BSTPostDetailActivity.class);
-
-                        intent.putExtra("ClickQuestionPost",(Serializable)BSTPosts.get(i));
-                        intent.putExtra("ReplyNum",(Serializable)BSTPostReplyNum);
+                    public void onEditClick(int i) {
+                        Intent intent = new Intent(CurrentUserBSTPostDetail2Activity.this,EditQuestionPostActivity.class);
+                        intent.putExtra("title",Current_BSTPosts.get(i).get("bpost_title").toString());
+                        intent.putExtra("content",Current_BSTPosts.get(i).get("bpost_content").toString());
+                        intent.putExtra("id",Current_BSTPosts.get(i).get("bpost_id").toString());
                         //startActivity(intent);
                         startActivityForResult(intent,1);
                     }
                 });
+
+
+
+                lv_userAllQuestion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(getApplicationContext(),BSTPostDetailActivity.class);
+                        intent.putExtra("ClickQuestionPost",(Serializable)Current_BSTPosts.get(i));
+                        intent.putExtra("ReplyNum",(Serializable)BSTPostReplyNum);
+                        startActivity(intent);
+                    }
+                });
             }
-
-
 
             super.handleMessage(msg);
         }
     };
 
-    // 回调方法，从第二个页面回来的时候会执行这个方法
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                getBSTPostReplyNumRefresh();
-                break;
-            case 2:
-                isGetReplyNum = false;
-                isGetPost = false;
-                getBSTPostReplyNum();
-                getBSTPostList();
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_bai_shi_tong, container, false);
-        /**
-         * 初始化变量
-         */
-        lv_BSTPosts = (ListView)view.findViewById(R.id.lv_question);
-        bt_sendBSTPost = (FloatingActionButton)view.findViewById(R.id.fab_questionpost_add);
-        bt_sendBSTPost.attachToListView(lv_BSTPosts);
-
-        question_top = (LinearLayout)view.findViewById(R.id.question_top);
-        CurrentUserquestionNumber = (TextView)view.findViewById(R.id.tv_questionNumber);
-
-        bt_sendBSTPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(getContext(),"test",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity().getApplicationContext(),AddQuestionPostActivity.class);
-                //startActivity(intent);
-                startActivityForResult(intent,2);
-            }
-        });
-
-
-
-
+    public void onResume() {
+        isGetPost = false;
+        isGetReplyNum = false;
+        isGetNum = false;
         getBSTPostReplyNum();
         getBSTPostList();
         getUserPostNum();
+        super.onResume();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_current_user_bstpost_detail);
+        getSupportActionBar().hide();
+        initView();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        //将当前用户的头像和昵称展示在顶端
+        Glide.with(getApplicationContext()).load(CurrentUserUtil.getCurrentUser().getUser_avatar()).into(avatar);
+        username.setText(CurrentUserUtil.getCurrentUser().getUser_nickname());
 
 
-        return view;
+        getBSTPostList();
+        getBSTPostReplyNum();
+        getUserPostNum();
+    }
+
+
+    private void initView() {
+        avatar = (CircleImageView)this.findViewById(R.id.CurrentUserAllQuestion_Avatar);
+        username = (TextView)this.findViewById(R.id.CurrentUserAllQuestion_Username);
+        lv_userAllQuestion = (ListView)this.findViewById(R.id.CurrentUserAllQuestion_List);
+        TopQuestionNum = (TextView)this.findViewById(R.id.CurrentUserQuestionNum);
+        back = (Button)this.findViewById(R.id.currentUserALLQuestion_back);
+        swipeRefreshLayout = (SwipeRefreshLayout)this.findViewById(R.id.refresh_currentUserAllPost);
     }
 
     private void getBSTPostList() {
@@ -299,6 +272,7 @@ public class BaiShiTongFragment extends Fragment {
         });
     }
 
+
     private void getBSTPostReplyNum() {
         //实例化OkHttpClient
         OkHttpClient client = new OkHttpClient();
@@ -349,66 +323,6 @@ public class BaiShiTongFragment extends Fragment {
                     //通过handler传递数据到主线程
                     Message msg = new Message();
                     msg.what = GET_BSTPOST_REPLY_NUM_SUCCESS;
-                    msg.obj = BSTPostReplyNum;
-                    handler.sendMessage(msg);
-
-                }else{
-
-                }
-            }
-        });
-    }
-
-    private void getBSTPostReplyNumRefresh() {
-        //实例化OkHttpClient
-        OkHttpClient client = new OkHttpClient();
-        //创建表单请求体
-        FormBody.Builder formBody = new FormBody.Builder();
-
-        /**
-         * 传递键值对参数
-         * key一定要和LoginActivityAction里面的变量同名！！！一定要同名！！！
-         */
-        /*formBody.add("username",userName);
-        formBody.add("password",passWord);*/
-
-        //创建Request对象
-        final Request request = new Request.Builder()
-                .url(getBSTPostReplyURL)
-                .build();
-        //.post(formBody.build())
-
-        /**
-         * Get的异步请求，不需要跟同步请求一样开启子线程
-         * 但是回调方法还是在子线程中执行的
-         * 所以要用到Handler传数据回主线程更新UI
-         */
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-            }
-
-            //回调的方法执行在子线程
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if(response.isSuccessful()){
-                    HashMap<String, Object> BSTPostReplyNum = new HashMap<String, Object>();
-                    //从服务器取到Json键值对{“key”:“value”}
-                    String temp = response.body().string();
-
-                    try{
-                        JSONObject jsonObject=new JSONObject(temp);
-                        String jsonResult = jsonObject.get("ReplyNumMap").toString();
-
-                        BSTPostReplyNum = JsonUtil.convertJsonStrToMap(jsonResult);
-
-                    }catch (JSONException a){
-
-                    }
-
-                    //通过handler传递数据到主线程
-                    Message msg = new Message();
-                    msg.what = GET_BSTPOST_REPLY_NUM_SUCCESS_REFRESH;
                     msg.obj = BSTPostReplyNum;
                     handler.sendMessage(msg);
 

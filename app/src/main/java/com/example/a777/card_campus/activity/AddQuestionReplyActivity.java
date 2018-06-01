@@ -240,8 +240,7 @@ public class AddQuestionReplyActivity extends AppCompatActivity {
                             long posttime1 = JSON.parseObject(posttime).getLong("time");
                             Timestamp truePostTime = new Timestamp(posttime1);
 
-                            String postid = jsonObject1.get("bpost_id").toString();
-                            int bpost_id = Integer.parseInt(postid);
+                            String bpost_id = jsonObject1.get("bpost_id").toString();
 
                             String postcontent = jsonObject1.get("bpost_content").toString();
                             String posttitle = jsonObject1.get("bpost_title").toString();

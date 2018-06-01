@@ -37,6 +37,8 @@ dependencies {
     })
 
     //compile 'com.sackcentury:shinebutton:0.2.0'
+    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
+    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
     compile 'com.moxun:tagcloudlib:1.2.0'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -52,10 +54,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.alibaba:fastjson:1.2.46'
     compile 'com.zhihu.android:matisse:0.4.3'
-    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
     compile 'pub.devrel:easypermissions:0.4.3'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
     compile 'com.qiniu:happy-dns:0.2.13'
+    testCompile 'junit:junit:4.12'
 }

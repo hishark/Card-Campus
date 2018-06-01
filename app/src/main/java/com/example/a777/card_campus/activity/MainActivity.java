@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.a777.card_campus.fragment.BaiShiTongFragment;
 import com.example.a777.card_campus.fragment.BookFragment;
 import com.example.a777.card_campus.fragment.EverythingFragment;
 import com.example.a777.card_campus.fragment.HomepageFragment;
@@ -519,8 +520,10 @@ public class MainActivity extends AppCompatActivity
             insteadFragment = new InsteadFragment();
             replaceFragment(insteadFragment);
         } else if (id == R.id.nav_BaiShiTong) {
-            everythingFragment = new EverythingFragment();
-            replaceFragment(everythingFragment);
+            //everythingFragment = new EverythingFragment();
+            //replaceFragment(everythingFragment);
+            BaiShiTongFragment baiShiTongFragment = new BaiShiTongFragment();
+            replaceFragment(baiShiTongFragment);
         } else if (id == R.id.nav_BiaoBaiQiang) {
             lovewallFragment = new LovewallFragment();
             replaceFragment(lovewallFragment);

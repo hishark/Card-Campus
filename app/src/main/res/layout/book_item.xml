@@ -16,7 +16,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="41dp"
-            android:layout_width="70dp"
+            android:layout_width="60dp"
             android:textSize="14dp"
             android:layout_height="wrap_content"
             android:text="老人与海哈哈哈哈哈哈哈"/>

@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:textColor="#282828"
-                        android:text="问题标题"
+                        android:text="书名"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:textColor="#282828"
-                        android:text="问题描述"
+                        android:text="描述"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:textColor="#282828"
-                        android:text="解决状态"
+                        android:text="状态"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
@@ -136,12 +136,12 @@
                             android:id="@+id/rb_sold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="已解决"/>
+                            android:text="已卖出"/>
                         <RadioButton
                             android:id="@+id/rb_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="未解决"/>
+                            android:text="未卖出"/>
                     </RadioGroup>
 
                     <!--<EditText

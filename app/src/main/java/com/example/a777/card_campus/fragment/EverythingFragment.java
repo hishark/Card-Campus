@@ -147,8 +147,8 @@ public  class EverythingFragment extends Fragment {
                     Collections.reverse(QuestionReplyResults);
 
                     //适配器一定要写在这里，不然会出现空指针问题
-                    questionPostAdapter = new QuestionPostAdapter(getActivity().getApplicationContext(),QuestionPostResult,QuestionReplyNum);
-                    lv_question.setAdapter(questionPostAdapter);
+                    //questionPostAdapter = new QuestionPostAdapter(getActivity().getApplicationContext(),QuestionPostResult,QuestionReplyNum);
+                    //lv_question.setAdapter(questionPostAdapter);
 
                     lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

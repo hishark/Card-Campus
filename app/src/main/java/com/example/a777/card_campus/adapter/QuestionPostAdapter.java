@@ -44,12 +44,13 @@ import okhttp3.Response;
 public class QuestionPostAdapter extends BaseAdapter {
     Context context;
     List<HashMap<String, Object>> list;
-    int ReplyNum[];
+    HashMap<String, Object> BSTPostReplyNum;
+    //int ReplyNum[];
 
-    public QuestionPostAdapter(Context applicationContext, List<HashMap<String, Object>> questionPostResult, int[] questionReplyNum) {
+    public QuestionPostAdapter(Context applicationContext, List<HashMap<String, Object>> questionPostResult, HashMap<String, Object> num) {
         this.context = applicationContext;
         this.list = questionPostResult;
-        this.ReplyNum = questionReplyNum;
+        this.BSTPostReplyNum = num;
     }
 
     @Override
@@ -75,8 +76,14 @@ public class QuestionPostAdapter extends BaseAdapter {
 
 
         TextView tv_questionReplyNum = (TextView)ll.findViewById(R.id.questionpost_replyNum);
-        //tv_questionReplyNum.setText(ReplyNum[i+1]+"");
-        tv_questionReplyNum.setText(ReplyNum[list.size()-i]+"");
+        Log.d("BSTREPLY好像为空",BSTPostReplyNum.toString()+"!");
+
+        String post_id = list.get(i).get("bpost_id").toString();
+        int replyNum = (int)BSTPostReplyNum.get(post_id);
+        Log.d("回复还是拿到了吧",replyNum+"");
+
+
+        tv_questionReplyNum.setText(replyNum+"");
         tv_questionReplyNum.setTextColor(Color.parseColor("#757575"));
 
         User user = (User)list.get(i).get("user");

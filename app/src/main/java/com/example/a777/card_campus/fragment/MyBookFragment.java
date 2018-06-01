@@ -48,7 +48,7 @@ public class MyBookFragment extends Fragment {
 
     private View view;
     //买了个服务器 ip为47.106.148.107 模拟器是10.0.2.2 真机192.168.137.1
-    private String BookListURL = "http://10.0.2.2:8080/Card-Campus-Server/getBookList";
+    private String BookListURL = "http://47.106.148.107:8080/Card-Campus-Server/getBookList";
     private List<HashMap<String, Object>> bookpostResult;
     private ListView lv_bookposts;
     private SwipeRefreshLayout swipeRefreshLayout;//SwipeRefreshLayout下拉刷新控件

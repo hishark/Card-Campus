@@ -230,12 +230,12 @@
                         android:text="实物：" />
 
                     <ImageButton
-                        android:layout_marginRight="50dp"
                         android:id="@+id/imgbt_BookImg"
-                        android:background="@drawable/frame3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/frame3" />
 
                     <ImageButton
                         android:id="@+id/imgbt_addBookImg_gallery"

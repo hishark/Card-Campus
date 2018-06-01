@@ -27,7 +27,7 @@ import okhttp3.Response;
 
 public class EditBookPostActivity extends AppCompatActivity {
 
-    private static String editbookURL="http://10.0.2.2:8080/Card-Campus-Server/editBookPost";
+    private static String editbookURL="http://47.106.148.107:8080/Card-Campus-Server/editBookPost";
 
     private EditText title,content;
     private Button back,edit;
@@ -83,7 +83,7 @@ public class EditBookPostActivity extends AppCompatActivity {
                     }
                 }
 
-                if(state.equals("已解决")){
+                if(state.equals("已卖出")){
                     state="1";
                 }else {
                     state="0";

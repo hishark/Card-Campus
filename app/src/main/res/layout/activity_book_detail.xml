@@ -103,6 +103,14 @@
                             android:layout_below="@+id/bookpost_username"
                             android:layout_toRightOf="@+id/bookpost_userAvatar"
                             android:layout_alignBottom="@+id/bookpost_userAvatar"/>
+                        <ImageView
+                            android:id="@+id/soldorsale"
+                            android:layout_marginLeft="310dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+
+                            />
                     </RelativeLayout>
                     <RelativeLayout
                         android:layout_width="match_parent"
