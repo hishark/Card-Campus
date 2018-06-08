@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.a777.card_campus.activity.AboutActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStart="0dp">
+            <Button
+                android:id="@+id/about_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/back"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Q1:登陆问题"
+        android:textColor="#75919f"
+        android:textSize="18sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="  本app仅供拥有江西师范大学学号的学子使用，使用教务在线的账号密码进行登陆即可。"
+        android:textColor="#75919f"
+        android:lineSpacingExtra="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Q2:输入教务在线的密码安全吗？"
+        android:textColor="#75919f"
+        android:textSize="18sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="  在登陆本app时，我们仅使用学号密码判断该用户是否为江西师范大学的学生，保存用户信息时也只保存用户的学号，后台服务器不会存储任何密码信息，请放心！"
+        android:textColor="#75919f"
+        android:lineSpacingExtra="10dp"/>
+</LinearLayout>

@@ -33,7 +33,7 @@
             <item
                 android:id="@+id/nav_Setting"
                 android:icon="@drawable/setting"
-                android:title="设置" />
+                android:title="注销" />
             <item
                 android:id="@+id/nav_About"
                 android:icon="@drawable/about"

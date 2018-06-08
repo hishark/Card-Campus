@@ -40,6 +40,7 @@ import com.example.a777.card_campus.fragment.LovewallFragment;
 import com.example.a777.card_campus.R;
 import com.example.a777.card_campus.fragment.MyPostFragment;
 import com.example.a777.card_campus.qiniuyun.Auth;
+import com.example.a777.card_campus.util.CommonAction;
 import com.example.a777.card_campus.util.CurrentUserUtil;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -65,7 +66,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //47.106.148.107
@@ -534,11 +535,13 @@ public class MainActivity extends AppCompatActivity
             myPostFragment = new MyPostFragment();
             replaceFragment(myPostFragment);
         } else if (id == R.id.nav_Setting) {
-            //登录界面放到这测试一下
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            CommonAction.getInstance().OutSign();
         } else if (id == R.id.nav_About) {
-
+            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
