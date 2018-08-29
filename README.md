@@ -1,4 +1,6 @@
 # Card-Campus
+大三下工作室与[@YiyaCheng](https://github.com/YiyaCheng)一起完成的APP🎀
+
 [卡片校园用户使用手册](http://p81fp7gd5.bkt.clouddn.com/%E5%8D%A1%E7%89%87%E6%A0%A1%E5%9B%AD%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C.docx)by [@YiyaCheng](https://github.com/YiyaCheng)
 
 先放一堆截图吧有空了再来录视频OTZ
