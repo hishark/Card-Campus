@@ -3,16 +3,12 @@
 
 [卡片校园用户使用手册](http://p81fp7gd5.bkt.clouddn.com/%E5%8D%A1%E7%89%87%E6%A0%A1%E5%9B%AD%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C.docx)by [@YiyaCheng](https://github.com/YiyaCheng)
 ### 视频演示
-1. [登录](http://p3as6e9rs.bkt.clouddn.com/%E7%99%BB%E9%99%86+%E6%8D%A2%E5%A4%B4%E5%83%8F+%E6%8D%A2%E5%90%8D%E5%AD%97+%E6%B3%A8%E9%94%80.mp4)
-2. [百事通模块](http://p3as6e9rs.bkt.clouddn.com/%E7%99%BE%E4%BA%8B%E9%80%9A%E6%A8%A1%E5%9D%97.mp4)
-3. [表白墙模块](http://p3as6e9rs.bkt.clouddn.com/%E8%A1%A8%E7%99%BD%E5%A2%99%E6%A8%A1%E5%9D%97.mp4)
-4. [代代代模块](http://p3as6e9rs.bkt.clouddn.com/%E4%BB%A3%E4%BB%A3%E4%BB%A3%E6%A8%A1%E5%9D%97.mp4)
-5. [二手书模块](http://p3as6e9rs.bkt.clouddn.com/%E4%BA%8C%E6%89%8B%E4%B9%A6%E6%A8%A1%E5%9D%97.mp4)
-6. [我的帖子](http://p3as6e9rs.bkt.clouddn.com/%E6%88%91%E7%9A%84%E5%B8%96%E5%AD%90.mp4)
-
-
-[我的帖子](//player.bilibili.com/player.html?aid=35639892&cid=62506144&page=1)
-
+1. [登录](//player.bilibili.com/player.html?aid=35679058&cid=62582898&page=4)
+2. [百事通模块](//player.bilibili.com/player.html?aid=35679058&cid=62582883&page=1)
+3. [表白墙模块](//player.bilibili.com/player.html?aid=35679058&cid=62582885&page=2)
+4. [代代代模块](//player.bilibili.com/player.html?aid=35679058&cid=62582895&page=3)
+5. [二手书模块](//player.bilibili.com/player.html?aid=35679058&cid=62582904&page=5)
+6. [我的帖子](//player.bilibili.com/player.html?aid=35679058&cid=62582904&page=6)
 
 ### 截图展示
 
